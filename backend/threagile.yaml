@@ -1,0 +1,124 @@
+threagile_version: 1.0.0
+title: System Processing Highly Sensitive Personal Data
+date: 2023-10-27
+author:
+  name: Security Architect
+tags_available:
+  - linux
+
+data_assets:
+  customer_pii:
+    id: customer-pii
+    description: "Highly sensitive Personally Identifiable Information of customers, including financial and health data, which is subject to strict data protection regulations."
+    usage: business
+    quantity: very-many
+    confidentiality: strictly-confidential
+    integrity: critical
+    availability: important
+    justification_cia_rating: "The data contains highly sensitive PII, making its confidentiality paramount. Integrity is critical to prevent fraud. Availability is important for business operations."
+
+technical_assets:
+  user_client:
+    id: user_client
+    description: "End-user's browser accessing the customer portal. This is considered an external entity outside of our control."
+    type: external-entity
+    usage: business
+    used_as_client_by_human: true
+    technology: browser
+    internet: true
+
+  customer_portal:
+    id: customer_portal
+    description: "The web application frontend that users interact with to manage their data."
+    type: process
+    usage: business
+    size: service
+    technology: web-application
+    internet: true
+    machine: container
+    custom_developed_parts: true
+    data_assets_processed:
+      - customer-pii
+    communication_links:
+      user_interaction_link:
+        target: user_client
+        description: "Bidirectional communication with the user's browser for the web session."
+        protocol: https
+        authentication: token
+        authorization: enduser-identity-propagation
+        data_assets_sent:
+          - customer-pii
+        data_assets_received:
+          - customer-pii
+      customer_service_link:
+        target: customer_service_backend
+        description: "API calls to backend for data management"
+        protocol: https
+        authentication: token
+        authorization: enduser-identity-propagation
+        data_assets_sent:
+          - customer-pii
+        data_assets_received:
+          - customer-pii
+
+  customer_service_backend:
+    id: customer_service_backend
+    description: "Backend service that processes customer PII and interacts with the database."
+    type: process
+    usage: business
+    size: service
+    technology: web-service-rest
+    internet: false
+    machine: container
+    custom_developed_parts: true
+    data_assets_processed:
+      - customer-pii
+    communication_links:
+      pii_database_link:
+        target: pii_database
+        description: "Stores and retrieves PII"
+        protocol: sql-access-protocol-encrypted
+        authentication: credentials
+        authorization: technical-user
+        data_assets_sent:
+          - customer-pii
+        data_assets_received:
+          - customer-pii
+
+  pii_database:
+    id: pii_database
+    description: "Database storing all customer PII."
+    type: datastore
+    usage: business
+    size: database
+    technology: database
+    internet: false
+    machine: virtual
+    encryption: transparent
+    redundant: true
+    data_assets_stored:
+      - customer-pii
+
+trust_boundaries:
+  cloud_environment_tb:
+    id: cloud-environment-tb
+    description: "The overall cloud provider environment boundary."
+    type: network-cloud-provider
+    trust_boundaries_nested:
+      - dmz_tb
+      - internal_backend_zone
+
+  dmz_tb:
+    id: dmz-tb
+    description: "Demilitarized Zone for public-facing services, isolated by a security group."
+    type: network-cloud-security-group
+    technical_assets_inside:
+      - customer_portal
+
+  internal_backend_zone:
+    id: internal-backend-zone
+    description: "Secured internal network zone (VLAN/VPC) for backend services and databases."
+    type: network-virtual-lan
+    technical_assets_inside:
+      - customer_service_backend
+      - pii_database

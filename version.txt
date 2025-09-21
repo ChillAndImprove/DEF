@@ -1,0 +1,5 @@
+Triangle Closed-Source Distribution
+Built: Mi 17. Sep 19:34:25 CEST 2025
+Build ID: 20250917193425
+Obfuscated: Yes
+Source Maps: Removed

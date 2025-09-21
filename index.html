@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Triangle</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<!-- Project specific styles -->
+	<link rel="stylesheet" type="text/css" href="styles/grapheditor.css">
+	<link rel="stylesheet" type="text/css" href="styles/tagify.css">
+
+    <!-- Obfuscated bundles -->
+    <script type="module" src="dist/js.bundle.js" ></script>
+    <script type="module" src="dist/app.bundle.js" ></script>
+
+	<script type="text/javascript">
+	    // Initial inline script
+	    window.addEventListener('load', function() {
+		var logo = document.getElementById('logo');
+	    });
+	</script>
+
+	<!-- Inline styles -->
+	<style type="text/css">
+	.pipeFlowAnimation {
+	  stroke-dasharray: 8;
+	  animation: pipeFlowKeyframes 0.5s linear;
+	  animation-iteration-count: infinite;
+	}
+	@keyframes pipeFlowKeyframes {
+	  to {
+	    stroke-dashoffset: -16;
+	  }
+	}
+	</style>
+	<style type="text/css">
+    .image-fade-out-transition {
+        opacity: 1;
+        transition: opacity 2s ease-out;
+    }
+    </style>
+    <script type="text/javascript">
+    // Logo fade out script
+    window.addEventListener('load', function() {
+        var logo = document.getElementById('logo_tiger');
+        setTimeout(function() {
+            logo.style.transition = 'opacity 2s ease-out';
+            logo.style.opacity = '0';
+
+            setTimeout(function() {
+                logo.style.display = 'none';
+            }, 2000);
+        }, 1000);
+    });
+    </script>
+    <style type="text/css">
+    #logo_tiger {
+        position: relative;
+        justify-content: center;
+        margin: 0 auto;
+        height: auto;
+        z-index: 999;
+        width: 600px;
+        display: flex;
+    }
+    </style>
+
+	<script type="text/javascript">
+        // This variable will be set by the child window/iframe
+        let currentSelectedThreatStandard = "BSI"; // Initialize
+        window.currentSelectedThreatStandard = "BSI";
+        // Function for the child window to call
+        function setThreatStandardContext(standardCode) {
+            window.currentSelectedThreatStandard = standardCode;
+            console.log(`Parent (index.html): Standard set to: ${currentSelectedThreatStandard}`);
+        }
+
+        function showSelectedStandard() {
+            alert(`Current standard in index.html is: ${currentSelectedThreatStandard}`);
+        }
+	</script>
+
+	<script type="text/javascript">
+		// Parses URL parameters
+		var urlParams = (function(url)
+		{
+			var result = new Object();
+			var idx = url.lastIndexOf('?');
+
+			if (idx > 0)
+			{
+				var params = url.substring(idx + 1).split('&');
+
+				for (var i = 0; i < params.length; i++)
+				{
+					idx = params[i].indexOf('=');
+
+					if (idx > 0)
+					{
+						result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+					}
+				}
+			}
+
+			return result;
+		})(window.location.href);
+
+		mxLoadResources = false;
+        var RESOURCE_BASE = 'resources/grapheditor';
+        var STYLE_PATH = 'styles';
+        var IMAGE_PATH = 'images';
+        var STENCIL_PATH = 'stencils';
+	</script>
+</head>
+<body class="geEditor">
+	<!-- Language Switcher -->
+	<div id="language-switcher" style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: white; padding: 5px; border: 1px solid #ccc; border-radius: 3px;">
+		<label for="language-select">🌍 Language:</label>
+		<select id="language-select" onchange="switchLanguage(this.value)">
+			<option value="en">English</option>
+			<option value="de">Deutsch</option>
+		</select>
+	</div>
+
+	<script>
+		// Language switcher functionality
+		function switchLanguage(lang) {
+			localStorage.setItem('preferredLanguage', lang);
+			console.log('Language switched to:', lang);
+			// Force reload to apply new language
+			window.location.reload();
+		}
+
+		// Set initial language from localStorage or browser
+		window.addEventListener('load', function() {
+			const saved = localStorage.getItem('preferredLanguage');
+			const detected = navigator.language.startsWith('de') ? 'de' : 'en';
+			const lang = saved || detected;
+
+			document.getElementById('language-select').value = lang;
+			console.log('Current language:', lang);
+		});
+	</script>
+
+	<img src="images/logo.png" id="logo_tiger" class="image-fade-out-transition">
+</html>

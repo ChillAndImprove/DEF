@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Load Threat Model</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 15px;
+            font-size: 10pt;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        h2 { margin-top: 0; margin-bottom: 15px; color: #343a40; font-size: 1.4em;
+             border-bottom: 1px solid #dee2e6; padding-bottom: 5px; }
+        h3 { margin-top: 15px; margin-bottom: 10px; color: #495057; font-size: 1.1em; }
+        section { margin-bottom: 20px; padding: 15px; background-color: #ffffff;
+                  border: 1px solid #dee2e6; border-radius: 4px; }
+
+        .geBtn {
+            display: inline-block; font-weight: 400; color: #212529; text-align: center;
+            vertical-align: middle; cursor: pointer; user-select: none; background-color: #e9ecef;
+            border: 1px solid #ced4da; padding: 0.375rem 0.75rem; font-size: 1rem;
+            line-height: 1.5; border-radius: 0.25rem; margin-right: 5px; margin-bottom: 5px;
+        }
+        .geBtn:hover { background-color: #ced4da; border-color: #adb5bd; }
+        .gePrimaryBtn { color: #fff; background-color: #007bff; border-color: #007bff; }
+        .gePrimaryBtn:hover { background-color: #0056b3; border-color: #004085; }
+        .gePrimaryBtn:disabled { background-color: #6c757d; border-color: #6c757d; cursor: not-allowed; opacity: 0.65; }
+
+        /* Gray out incomplete example templates */
+        .geBtn.disabled {
+            background-color: #e9ecef;
+            color: #6c757d;
+            border-color: #ced4da;
+            cursor: not-allowed;
+            opacity: 0.65;
+            pointer-events: none;
+        }
+
+        .standard-flag {
+            width: 32px; height: auto; margin-right: 10px; cursor: pointer;
+            border: 2px solid transparent; border-radius: 3px; vertical-align: middle;
+            transition: border-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+        }
+        .standard-flag:hover { border-color: #adb5bd; transform: scale(1.1); }
+        .standard-flag.selected {
+            border-color: #007bff; box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* 🔒 Disable and gray out everything except German (BSI) */
+        .standard-flag:not([data-standard="BSI"]) {
+            pointer-events: none;
+            opacity: 0.5;
+            filter: grayscale(100%);
+            cursor: not-allowed;
+        }
+        /* No hover effects for disabled flags */
+        .standard-flag:not([data-standard="BSI"]):hover {
+            border-color: transparent;
+            transform: none;
+        }
+
+        #upload-section input[type="file"] { display: block; margin-bottom: 10px; font-size: 0.9em; }
+        #openSupported { font-size: 0.85em; color: #6c757d; margin-top: 5px; }
+        .button-bar { margin-top: 20px; text-align: right; padding-top: 15px; border-top: 1px solid #dee2e6; }
+    </style>
+</head>
+<body>
+
+    <h2>Load or Start New Threat Model</h2>
+
+    <section id="examples-section">
+        <h3>Start with an Example:</h3>
+        <button type="button" id="customer_portal_erp_threat_model" class="geBtn exampleBtn" data-path="backend/customer_portal_erp_threat_model.triangle">Portal + ERP</button>
+        <button type="button" id="basic_webapp" class="geBtn exampleBtn disabled" data-path="backend/basic_webapp_threat_model.yaml" title="Coming soon - not yet implemented">Basic Web App (Coming Soon)</button>
+        <button type="button" id="simple_api_threat_model" class="geBtn exampleBtn disabled" data-path="backend/simple_api_threat_model.yaml" title="Coming soon - not yet implemented">Simple API (Coming Soon)</button>
+        <button type="button" id="kubernetes_api_threat_model" class="geBtn exampleBtn disabled" data-path="backend/kubernetes.yaml" title="Coming soon - not yet implemented">WebGIS with Kubernetes (Coming Soon)</button>
+    </section>
+
+    <section id="standard-section">
+        <h3>Select Threat Standard / Region:</h3>
+        <img src="flags/de.png" alt="German BSI" class="standard-flag" data-standard="BSI" title="German BSI Standards">
+        <img src="flags/us.png" alt="US NIST/NSI" class="standard-flag" data-standard="NIST" title="US NIST/NSI Standards">
+        <img src="flags/fr.png" alt="French ANSSI" class="standard-flag" data-standard="ANSSI" title="French ANSSI Standards (Future)">
+        <img src="flags/eu.png" alt="EU ENISA/Generic" class="standard-flag" data-standard="GENERIC" title="Generic / EU ENISA Baseline">
+    </section>
+
+    <section id="upload-section">
+        <h3>Upload Your Own Model:</h3>
+        <form method="POST" enctype="multipart/form-data" action="" name="openForm" id="openForm" onsubmit="return handleSubmit();" accept-charset="UTF-8">
+            <input type="file" name="upfile" id="fileInput" onchange="fileChanged()" accept=".triangle">
+            <div id="openSupported">Supported format: .triangle (Triangle format)</div>
+        </form>
+    </section>
+
+    <div class="button-bar">
+        <input type="button" id="cancelButton" class="geBtn" value="Cancel" onclick="hideWindow(true);">
+        <input type="submit" form="openForm" id="openButton" class="geBtn gePrimaryBtn" value="Open" disabled="disabled">
+    </div>
+
+<script type="text/javascript">
+    function handleFiles(files, isExample = false) {
+        if (!files || files.length === 0) return;
+        for (var i = 0; i < files.length; i++) {
+            (function(file) {
+                if (window.parent.openNew) { window.parent.open(window.parent.location.href); }
+
+                // Check if it's a .triangle file
+                const isTriangleFile = file.name.toLowerCase().endsWith('.triangle');
+
+                if (isTriangleFile) {
+                    // Use obfuscated triangle file handler from parent window
+                    if (window.parent.handleTriangleFile) {
+                        window.parent.handleTriangleFile(file);
+                    } else {
+                        alert('Error: Triangle file handler not available. Please reload the application.');
+                    }
+                } else if (isExample) {
+                    // Handle YAML files only for examples
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        if (window.parent.openFile && typeof window.parent.openFile.setData === 'function') {
+                            window.parent.openFile.setData(e.target.result, file.name);
+                        } else { console.error("Parent 'openFile.setData' not found."); alert("Error: Cannot process file."); }
+                    };
+                    reader.onerror = function(e) { console.error("File reading error:", e); alert(`Error reading file: ${file.name}`); };
+                    reader.readAsText(file);
+                } else {
+                    // Reject user uploaded files that aren't .triangle
+                    alert(`Error: Only .triangle files are supported for upload. Selected file: ${file.name}`);
+                }
+            })(files[i]);
+        }
+    }
+    function handleSubmit() {
+        var fileInput = document.getElementById('fileInput');
+        if (window.File && window.FileReader && fileInput.files.length > 0) {
+            handleFiles(fileInput.files); return false;
+        } else if (fileInput.files.length > 0) {
+            if (window.parent.mxUtils) window.parent.mxUtils.alert(window.parent.mxResources.get('invalidOrMissingFile'));
+            return false;
+        } else {
+            if (window.parent.mxUtils) window.parent.mxUtils.alert(window.parent.mxResources.get('invalidOrMissingFile'));
+            return false;
+        }
+    }
+
+    function loadExample(filePath) {
+        const isTriangleFile = filePath.toLowerCase().endsWith('.triangle');
+
+        if (isTriangleFile) {
+            // Handle .triangle files as binary
+            fetch(filePath)
+                .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.arrayBuffer(); })
+                .then(data => {
+                    const filename = filePath.split('/').pop() || 'example.triangle';
+                    const blob = new Blob([data], { type: 'application/x-triangle-binary' });
+                    const file = new File([blob], filename, { type: 'application/x-triangle-binary' });
+                    handleFiles([file], true);
+                })
+                .catch(error => { console.error(`Error loading ${filePath}:`, error); alert(`Could not load example: ${filePath}`); });
+        } else {
+            // Handle other files as text (fallback for disabled examples)
+            fetch(filePath)
+                .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.text(); })
+                .then(data => {
+                    const filename = filePath.split('/').pop() || 'example.yaml';
+                    const blob = new Blob([data], { type: 'text/yaml' });
+                    const file = new File([blob], filename, { type: 'text/yaml' });
+                    handleFiles([file], true);
+                })
+                .catch(error => { console.error(`Error loading ${filePath}:`, error); alert(`Could not load example: ${filePath}`); });
+        }
+    }
+
+    function selectThreatStandard(standardCode, flagElement) {
+        console.log(`Threat standard selected: ${standardCode}`);
+        document.querySelectorAll('.standard-flag').forEach(flag => flag.classList.remove('selected'));
+        if (flagElement) flagElement.classList.add('selected');
+
+        if (window.parent && typeof window.parent.setThreatStandardContext === 'function') {
+            window.parent.setThreatStandardContext(standardCode);
+            console.log(`Called parent.setThreatStandardContext with: ${standardCode}`);
+        } else {
+            console.warn("Parent window does not have a 'setThreatStandardContext' function.");
+        }
+        try { localStorage.setItem('selectedThreatStandard', standardCode); } catch (e) {}
+    }
+
+    function hideWindow(cancel) {
+        if (window.parent.openFile && typeof window.parent.openFile.cancel === 'function') {
+            window.parent.openFile.cancel(cancel);
+        } else { console.error("Parent 'openFile.cancel' not found."); window.close(); }
+    }
+    function fileChanged() {
+        var openButton = document.getElementById('openButton');
+        var fileInput = document.getElementById('fileInput');
+        openButton.disabled = !(fileInput.value.length > 0);
+    }
+
+    function initializeDialog() {
+        var openButton = document.getElementById('openButton');
+        var cancelButton = document.getElementById('cancelButton');
+        if (window.parent.mxResources) {
+            openButton.value = window.parent.mxResources.get(window.parent.openKey || 'open', null, 'Open');
+            cancelButton.value = window.parent.mxResources.get('cancel', null, 'Cancel');
+        }
+
+        document.querySelectorAll('.exampleBtn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Don't load if button is disabled
+                if (this.classList.contains('disabled')) {
+                    console.log('Disabled example button clicked, ignoring');
+                    return;
+                }
+                loadExample(this.getAttribute('data-path'));
+            });
+        });
+
+        // ✅ Only attach click handler to the German flag
+        document.querySelectorAll('.standard-flag[data-standard="BSI"]').forEach(flag => {
+            flag.addEventListener('click', function() {
+                selectThreatStandard('BSI', this);
+            });
+        });
+
+        // Restore previous selection visually (but keep others disabled)
+        try {
+            const savedStandard = localStorage.getItem('selectedThreatStandard');
+            const flagToSelect = document.querySelector(`.standard-flag[data-standard="${savedStandard}"]`)
+                                  || document.querySelector('.standard-flag[data-standard="BSI"]');
+            if (flagToSelect) {
+                document.querySelectorAll('.standard-flag').forEach(flag => flag.classList.remove('selected'));
+                flagToSelect.classList.add('selected');
+                console.log(`Initial standard set/restored to: ${flagToSelect.getAttribute('data-standard')}`);
+            }
+        } catch(e) {
+            const defaultFlag = document.querySelector('.standard-flag[data-standard="BSI"]');
+            if (defaultFlag) defaultFlag.classList.add('selected');
+        }
+
+        fileChanged();
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeDialog);
+</script>
+</body>
+</html>
+

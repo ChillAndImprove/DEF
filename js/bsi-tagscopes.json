@@ -1,0 +1,3340 @@
+[
+  {
+    "bsiCode": "SYS.2.5",
+    "bsiHeadline": "SYS.2.5 Client-Virtualisierung 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Latency",
+      "@BSI_ID",
+      "@Severity",
+      "@Category",
+      "@hardening:hardened-virtual-networking",
+      "@Backup",
+      "@SystemType",
+      "@Suppress",
+      "@Mitigation",
+      "@Maintenance",
+      "@Mitigation:TemplatePatching"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser",
+        "file-server",
+        "database",
+        "ldap-server"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps",
+        "jdbc",
+        "odbc",
+        "sql-access-protocol",
+        "smtp",
+        "smb",
+        "nfs"
+      ],
+      "dataFormats": [
+        "file",
+        "csv"
+      ],
+      "boundaries": [
+        "network-cloud-provider",
+        "network-virtual-lan",
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.2.6",
+    "bsiHeadline": "SYS.2.6 Virtual Desktop Infrastructure 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@System:VDI",
+      "@SystemType",
+      "@patch-managed"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business",
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.3.1",
+    "bsiHeadline": "SYS.3.1 Laptops 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SharedDevice"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "json",
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.3.2.1",
+    "bsiHeadline": "SYS.3.2.1 Allgemeine Smartphones und Tablets 1. Beschreibung",
+    "tags": [
+      "@root-detection:implemented",
+      "@SystemType:OT",
+      "@Maintenance:Unmaintained",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@PiiType",
+      "@DataType",
+      "@SystemType",
+      "@PrivateUseAllowed",
+      "@MDMManaged",
+      "@System:MDM",
+      "@device-owner"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "mobile-app",
+        "browser",
+        "iot-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "file",
+        "json"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.3.2.2",
+    "bsiHeadline": "SYS.3.2.2 Mobile Device Management (MDM) 1. Beschreibung",
+    "tags": [
+      "@System:MDM"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "mobile-app"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "https",
+        "http"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.3.2.3",
+    "bsiHeadline": "SYS.3.2.3 iOS (for Enterprise) 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@AppleIDRequired",
+      "@AppleID-2FA-Enabled",
+      "@Platform",
+      "@SystemType",
+      "@OS"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "mobile-app",
+        "mobile-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "https",
+        "http"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.3.2.4",
+    "bsiHeadline": "SYS.3.2.4 Android 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Bootloader",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Platform:Android",
+      "@SystemType",
+      "@Provider:Google"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "mobile-app",
+        "iot-device",
+        "identity-provider"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "https"
+      ],
+      "dataFormats": [
+        "json"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.3.3",
+    "bsiHeadline": "SYS.3.3 Mobiltelefon 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@SystemType:OT",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType:ICS",
+      "@SystemType:OT-device",
+      "@System:MDM",
+      "@Backup:Target",
+      "@SystemType",
+      "@legacy-mobile-device"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device",
+        "mobile-app"
+      ],
+      "type": [],
+      "protocols": [
+        "http",
+        "ftp",
+        "telnet"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.4.1",
+    "bsiHeadline": "SYS.4.1 Drucker, Kopierer und Multifunktionsgeräte 1. Beschreibung",
+    "tags": [
+      "@AssetType",
+      "@Location",
+      "@AssetType:Printer",
+      "@AssetType:Fax",
+      "@BSI_ID",
+      "@Category",
+      "@Severity",
+      "@DataType:PII",
+      "@SystemType:OT",
+      "@Backup",
+      "@Service:PrinterManagement",
+      "@Location:physically-secured",
+      "@Location:unsecured"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device",
+        "client-system",
+        "desktop"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "smtp",
+        "ldap",
+        "ldaps",
+        "smb"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem",
+        "network-virtual-lan"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.4.3",
+    "bsiHeadline": "SYS.4.3 Eingebettete Systeme 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Mitigation:SecureSDLC:Embedded",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType:OT",
+      "@environment",
+      "@Environment",
+      "@SystemType",
+      "@Mitigation:firmware-update-secured",
+      "@HardwareSupplyChainSensitive"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.3.4",
+    "bsiHeadline": "",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "file-server"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "smb",
+        "nfs"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.4.4",
+    "bsiHeadline": "SYS.4.4 Allgemeines IoT-Gerät 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "SYS.4.5",
+    "bsiHeadline": "SYS.4.5 Wechseldatenträger 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@RemovableMedia",
+      "@SystemType",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@DataType"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "local-file-system",
+        "block-storage",
+        "iot-device"
+      ],
+      "type": [
+        "datastore",
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.3.6",
+    "bsiHeadline": "APP.3.6 DNS-Server 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Service:DNSServer",
+      "@DNS-Concept-Applied",
+      "@dns-concept-applied",
+      "@Service",
+      "@SystemType",
+      "@mitigation:dnssec-validated"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-cloud-provider",
+        "network-virtual-lan",
+        "network-on-prem"
+      ],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "APP.4.2",
+    "bsiHeadline": "APP.4.2 SAP-ERP-System 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType",
+      "@Mitigation",
+      "@documentation-present",
+      "@contingency-plan-present"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.4.3",
+    "bsiHeadline": "APP.4.3 Relationale Datenbanken 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType",
+      "@mitigation",
+      "@mitigation:data-integrity-checks-in-place",
+      "@Hardened"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "database",
+        "identity-store-database",
+        "data-lake",
+        "big-data-platform"
+      ],
+      "type": [
+        "datastore"
+      ],
+      "protocols": [
+        "jdbc",
+        "odbc",
+        "sql-access-protocol"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "APP.4.4",
+    "bsiHeadline": "APP.4.4 Kubernetes 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Mitigation",
+      "@SystemType",
+      "@Mitigation:pod-resource-limits-applied"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "database",
+        "message-queue",
+        "reverse-proxy",
+        "waf",
+        "ldap-server",
+        "file-server",
+        "block-storage",
+        "data-lake",
+        "search-index",
+        "search-engine"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.4.6",
+    "bsiHeadline": "APP.4.6 SAP ABAPProgrammierung 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType",
+      "@sap",
+      "@abap",
+      "@erp"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "erp"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [
+        "json",
+        "xml",
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.5.2",
+    "bsiHeadline": "APP.5.2 Microsoft Exchange und Outlook 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Migration:Planned",
+      "@SystemType",
+      "@product",
+      "@vendor",
+      "@DataType",
+      "@Migration",
+      "@macro-enabled",
+      "@scriptable"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps",
+        "smtp"
+      ],
+      "dataFormats": [
+        "file",
+        "csv"
+      ],
+      "boundaries": [
+        "network-cloud-provider",
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.5.4",
+    "bsiHeadline": "APP.5.4 Unified Communications und Collaboration (UCC) 1. Beschreibung",
+    "tags": [
+      "@System:UCC-Service",
+      "@ThinClient",
+      "@Role:Administrator",
+      "@DataType:PII"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "json",
+        "xml"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business",
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.6",
+    "bsiHeadline": "APP.6 Allgemeine Software 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType",
+      "@Backup",
+      "@Maintenance:Unmaintained",
+      "@Role",
+      "@Usability"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.1.1",
+    "bsiHeadline": "APP.1.1 Office-Produkte 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Environment:OfficeIT",
+      "@boundary-type:office",
+      "@Location:HomeOffice",
+      "@Location:MeetingRoom",
+      "@Location:TrainingRoom",
+      "@Environment:OT",
+      "@Domain:OT",
+      "@SystemType:OT",
+      "@boundary-type:ics",
+      "@macro-enabled",
+      "@VDI-Client",
+      "@VDI-Component",
+      "@VDI-Management-Server",
+      "@Service:TerminalServer",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Handles",
+      "@IntegrityMechanism"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser",
+        "file-server"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "smtp",
+        "imap",
+        "pop3",
+        "smb",
+        "nfs"
+      ],
+      "dataFormats": [
+        "file",
+        "csv",
+        "serialization"
+      ],
+      "boundaries": [
+        "network-on-prem",
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.7",
+    "bsiHeadline": "APP.7 Entwicklung von Individualsoftware 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@ExternalServiceProvider",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "CON.10",
+    "bsiHeadline": "CON.10 Entwicklung von Webanwendungen 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Control",
+      "@SystemType",
+      "@Protection"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "browser",
+        "web-application",
+        "web-service"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "CON.11.1",
+    "bsiHeadline": "CON.11.1 Geheimschutz VS-NUR FÜR DEN DIENSTGEBRAUCH (VS-NfD)",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "database",
+        "file-server",
+        "block-storage"
+      ],
+      "type": [
+        "datastore",
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "CON.1",
+    "bsiHeadline": "CON.1 Kryptokonzept 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@SystemType",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@crypto-n@SystemType:OT-required",
+      "@Mitigation:@Backup:Target-verified",
+      "@Backup:Target",
+      "@SystemType:OT"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "database",
+        "file-server",
+        "block-storage"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "smtp",
+        "jdbc",
+        "odbc",
+        "sql-access-protocol",
+        "ldaps"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-cloud-provider",
+        "network-virtual-lan",
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "CON.2",
+    "bsiHeadline": "CON.2 Datenschutz 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@DataType:PII",
+      "@DataType:PII:SpecialCategory",
+      "@DataType:PII:Profiling",
+      "@DataType:PII:VulnerableSubject",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType",
+      "@monitoring-is-privacy-compliant",
+      "@ActorContext"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "database",
+        "waf",
+        "reverse-proxy"
+      ],
+      "type": [
+        "process",
+        "datastore",
+        "external-entity"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business",
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "CON.3",
+    "bsiHeadline": "CON.3 Datensicherungskonzept 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Backup:Target",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Recovery",
+      "@RecoveryPlan:documented",
+      "@RecoveryPlan:stored-offline",
+      "@Backup:Target-target"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "file-server",
+        "block-storage",
+        "database",
+        "data-lake"
+      ],
+      "type": [
+        "datastore",
+        "external-entity"
+      ],
+      "protocols": [
+        "smb",
+        "nfs",
+        "https"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "CON.6",
+    "bsiHeadline": "",
+    "tags": [
+      "@Role:ExternalServiceProvider"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "external-entity"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "CON.7",
+    "bsiHeadline": "",
+    "tags": [
+      "@Travel:Abroad",
+      "@Location:ForeignCountry",
+      "travel-device",
+      "@Context",
+      "@travel:international"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "file",
+        "csv"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "CON.8",
+    "bsiHeadline": "",
+    "tags": [
+      "@Legacy",
+      "@sast-scan-clean",
+      "@dast-scan-clean",
+      "@pentest-passed",
+      "@Environment:Test"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "CON.9",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "APP.1.2",
+    "bsiHeadline": "",
+    "tags": [
+      "@Hardened:Client"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "file",
+        "csv"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "DER.1",
+    "bsiHeadline": "",
+    "tags": [
+      "@mitigation:ids-monitoring-in-place",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Compliance",
+      "@DataType",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "DER.2.1",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "DER.2.2",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "DER.2.3",
+    "bsiHeadline": "",
+    "tags": [
+      "@out-of-band-management"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "DER.3.1",
+    "bsiHeadline": "",
+    "tags": [
+      "@BSI_ID",
+      "@Role:Administrator",
+      "@Role:ITSecurityOfficer",
+      "@Role:Management",
+      "role:pruefer"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "DER.3.2",
+    "bsiHeadline": "",
+    "tags": [
+      "@SecurityControl:Bypassed"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "DER.4",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "IND.1",
+    "bsiHeadline": "",
+    "tags": [
+      "@SystemType:ICS-component",
+      "@Environment:Harsh",
+      "@Domain:IT",
+      "@SystemType:OT",
+      "@SystemType:ICS",
+      "@OT",
+      "@SystemType:@SystemType:OT"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device",
+        "IoTDevice",
+        "Mainframe",
+        "Database",
+        "FileServer",
+        "BlockStorage",
+        "HSM",
+        "Vault",
+        "MailServer",
+        "desktop",
+        "browser",
+        "file-server"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps",
+        "jdbc",
+        "odbc",
+        "sql-access-protocol",
+        "smtp",
+        "smb",
+        "nfs"
+      ],
+      "dataFormats": [
+        "file",
+        "csv",
+        "json",
+        "xml",
+        "serialization"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "devops",
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "IND.2.1",
+    "bsiHeadline": "",
+    "tags": [
+      "@local-user-management",
+      "@SystemType:ICS",
+      "@SystemType:ICS-component",
+      "@boundary-type:office"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "database",
+        "file-server",
+        "iot-device",
+        "mainframe",
+        "erp",
+        "cms",
+        "ldap-server",
+        "identity-store-database",
+        "identity-store-ldap",
+        "vault",
+        "scheduler",
+        "report-engine"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "json",
+        "xml"
+      ],
+      "boundaries": [
+        "network-cloud-provider",
+        "network-on-prem"
+      ],
+      "usage": [
+        "business",
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "IND.2.2",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "APP.1.4",
+    "bsiHeadline": "",
+    "tags": [
+      "@Maintenance:Unmaintained"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "IND.2.3",
+    "bsiHeadline": "",
+    "tags": [
+      "@System:UCC",
+      "@ThinClient",
+      "@UCCService"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "file",
+        "csv"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "IND.2.4",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "IND.2.7",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "IND.3.2",
+    "bsiHeadline": "",
+    "tags": [
+      "@Environment:OT"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "INF.10",
+    "bsiHeadline": "",
+    "tags": [
+      "@Location:MeetingRoom"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "INF.11",
+    "bsiHeadline": "INF.11 Allgemeines Fahrzeug 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@vehicle",
+      "@patch-management",
+      "@environment",
+      "@physically-secure"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "INF.12",
+    "bsiHeadline": "",
+    "tags": [
+      "@cabling",
+      "@PhysicalProtection:none",
+      "@mitigation:ups-protected",
+      "@Backup:Target",
+      "@SystemType:OT",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@cabling:shielded",
+      "@cabling:fiber-optic"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-dedicated-hoster"
+      ],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "INF.13",
+    "bsiHeadline": "INF.13 Technisches Gebäudemanagement 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Documentation:SLA-Tracked",
+      "@Documentation:Certification-Tracked",
+      "@tga",
+      "@TGA",
+      "@IAM:dedicated"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device",
+        "ldap-server"
+      ],
+      "type": [
+        "external-entity",
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-virtual-lan"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "INF.14",
+    "bsiHeadline": "INF.14 Gebäudeautomation 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@AssetType",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@System",
+      "@AssetType:BuildingAutomationController",
+      "@SystemType:OT",
+      "@Unsupported-Component",
+      "@Maintenance",
+      "@BuildingSystem",
+      "@SystemType",
+      "@BuildingAutomationSystem",
+      "@Network",
+      "@PhysicalAccess"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device"
+      ],
+      "type": [
+        "process",
+        "external-entity"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "json",
+        "xml"
+      ],
+      "boundaries": [
+        "network-on-prem",
+        "network-virtual-lan"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "INF.1",
+    "bsiHeadline": "INF.1 Allgemeines Gebäude 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Mitigation",
+      "@LightningProtection",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@CustomTag",
+      "@SystemType",
+      "@redundant-power",
+      "@ups-protected",
+      "@generator-@Backup:Target"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-cloud-provider",
+        "network-dedicated-hoster"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.2.1",
+    "bsiHeadline": "APP.2.1 Allgemeiner Verzeichnisdienst 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Hardened:OS-for-Directory-Service",
+      "@SystemType",
+      "@Backup"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "ldap-server",
+        "identity-provider",
+        "identity-store-ldap",
+        "identity-store-database"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "ldap",
+        "ldaps"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "INF.2",
+    "bsiHeadline": "INF.2 Rechenzentrum sowie Serverraum 1. Beschreibung",
+    "tags": [
+      "@SystemType",
+      "@AccessControl:Strict",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@water-risk",
+      "@Datacenter",
+      "@BSI-Env:Datacenter"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-dedicated-hoster"
+      ],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "INF.5",
+    "bsiHeadline": "INF.5 Raum sowie Schrank für technische Infrastruktur 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@PhysicalProtection",
+      "@Environment",
+      "@Control",
+      "@physical-location-type",
+      "@mitigation:ups",
+      "@mitigation:redundant-power",
+      "@SurgeProtection",
+      "@EMI-Source-Nearby"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-dedicated-hoster"
+      ],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "INF.6",
+    "bsiHeadline": "INF.6 Datenträgerarchiv 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Archive:Physical",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Mitigation"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "file-server",
+        "block-storage",
+        "database"
+      ],
+      "type": [
+        "datastore"
+      ],
+      "protocols": [],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "INF.7",
+    "bsiHeadline": "INF.7 Büroarbeitsplatz 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Mitigation",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-dedicated-hoster"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "INF.8",
+    "bsiHeadline": "INF.8 Häuslicher Arbeitsplatz 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Location:HomeOffice",
+      "@telework-client",
+      "@SystemType:OT",
+      "@Location"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "INF.9",
+    "bsiHeadline": "INF.9 Mobiler Arbeitsplatz 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@MobileAccessPoint",
+      "@WorkModel",
+      "@SystemType",
+      "@MobileWorkplace"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser",
+        "iot-device",
+        "mobile-app"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "ORP.1",
+    "bsiHeadline": "ISMS.1 Sicherheitsmanagement 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Role:Management",
+      "@Role:ITSecurityOfficer",
+      "@SystemType",
+      "@Backup",
+      "@physical-access"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "ORP.2",
+    "bsiHeadline": "ISMS.1 Sicherheitsmanagement 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Custom"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "ORP.4",
+    "bsiHeadline": "ISMS.1 Sicherheitsmanagement 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "browser",
+        "database",
+        "ldap-server"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.1.1",
+    "bsiHeadline": "NET.1.1 Netzarchitektur und design 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@redundant-link-manually-confirmed",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "reverse-proxy",
+        "waf",
+        "gateway",
+        "service-mesh"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.1.2",
+    "bsiHeadline": "NET.1.2 Netzmanagement 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@SystemType",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@mitigation"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "reverse-proxy",
+        "waf"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.2.1",
+    "bsiHeadline": "NET.2.1 WLAN-Betrieb 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Network:WLAN-Component",
+      "@PhysicalLocation:Outdoor",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@component",
+      "@location",
+      "@Network:WLAN",
+      "@Network:WLAN-transport",
+      "@Authentication",
+      "@Network:WLAN-component",
+      "@SystemType:OT",
+      "@Access:Public"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser",
+        "iot-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-virtual-lan"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.2.2",
+    "bsiHeadline": "APP.2.2 Active Directory Domain Services 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Backup",
+      "@SystemType",
+      "@Privilege:DomainAdmin",
+      "@AssetType:PAW",
+      "@AD:Forest",
+      "@AD:Domain",
+      "@trust:reviewed",
+      "@trust:sid-filtering:enabled",
+      "@trust:selective-auth:enabled",
+      "@os",
+      "@role:helpdesk",
+      "@role:account-operator",
+      "@LegacyAuth",
+      "@PrivilegeLevel",
+      "@Privilege",
+      "@mitigation:rodc",
+      "@mitigation:ntlm-disabled",
+      "@mitigation:password-filter-installed"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "ldap-server",
+        "desktop",
+        "identity-store-ldap"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "ldap",
+        "ldaps",
+        "smb"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.2.2",
+    "bsiHeadline": "NET.2.2 WLAN-Nutzung 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Network",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Network:WLAN",
+      "@Environment"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser",
+        "iot-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.3.1",
+    "bsiHeadline": "NET.3.1 Router und Switches 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Role",
+      "@SystemType",
+      "@Role:Administrator",
+      "@Role:ITSecurityOfficer",
+      "@SystemType:OT",
+      "@Role:ExternalServiceProvider",
+      "@mitigation",
+      "@Device",
+      "@Capability"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-virtual-lan"
+      ],
+      "usage": [
+        "devops",
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.3.2",
+    "bsiHeadline": "NET.3.2 Firewall 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "waf",
+        "reverse-proxy"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "smtp"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business",
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.3.3",
+    "bsiHeadline": "NET.3.3 VPN 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@role",
+      "@Component",
+      "@Tag",
+      "@Role",
+      "@Role:Administrator",
+      "@Role:ITSecurityOfficer",
+      "@Role:ExternalServiceProvider",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "devops",
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.3.4",
+    "bsiHeadline": "NET.3.4 Network Access Control 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@authentication:mac-based",
+      "@Network:WLAN",
+      "@NACComponent",
+      "@NACProtected",
+      "@DataType:Logging",
+      "@DataType:PII"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem",
+        "network-virtual-lan"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.4.1",
+    "bsiHeadline": "NET.4.1 TK-Anlagen 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@monitoring-traffic-is-unencrypted-by-design",
+      "@Category:Telephony",
+      "@BSI-Device",
+      "@Access"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "iot-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "smtp"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.4.2",
+    "bsiHeadline": "NET.4.2 VoIP 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Service:VoIP",
+      "@Technology:VoIP-System",
+      "@SystemType:OT",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Service",
+      "@PhysicalAccess"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "mail-server",
+        "iot-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "smtp",
+        "http",
+        "ws",
+        "binary",
+        "text"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "NET.4.3",
+    "bsiHeadline": "NET.4.3 Faxgeräte und Faxserver 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@consumable-dependent",
+      "@AssetType:Fax",
+      "@AssetType:Printer",
+      "@AssetType:Fax-related",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@AssetType",
+      "@DataType:PII",
+      "@SystemType",
+      "@AssetType:Fax-gateway"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device",
+        "mail-server",
+        "client-system"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "smtp"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.1.1",
+    "bsiHeadline": "OPS.1.1.1 Allgemeiner IT-Betrieb 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Role:Administrator",
+      "@Role:Operator",
+      "@Role:ITSecurityOfficer",
+      "@SystemType",
+      "@Role:SystemAdministrator",
+      "@Role:ExternalServiceProvider",
+      "@Security",
+      "@Role"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "smtp"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem"
+      ],
+      "usage": [
+        "devops",
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.1.2",
+    "bsiHeadline": "OPS.1.1.2 Ordnungsgemäße IT-Administration 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Role",
+      "@Role:Administrator",
+      "@Role:Operator",
+      "@SystemType",
+      "@BSI_Concept"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "devops",
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.2.3",
+    "bsiHeadline": "APP.2.3 OpenLDAP 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@LDAPBackend",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "ldap-server"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "ldap",
+        "ldaps",
+        "nfs",
+        "smb"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.1.3",
+    "bsiHeadline": "OPS.1.1.3 Patch- und Änderungsmanagement 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Role",
+      "@SystemType",
+      "@patch-process",
+      "@SystemType:OT"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.1.4",
+    "bsiHeadline": "OPS.1.1.4 Schutz vor Schadprogrammen 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Backup",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser",
+        "file-server",
+        "database"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "smtp",
+        "smb",
+        "nfs"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.1.5",
+    "bsiHeadline": "OPS.1.1.5 Protokollierung 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business",
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.1.6",
+    "bsiHeadline": "OPS.1.1.6 Software-Tests und Freigaben 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType:OT",
+      "@release-criteria:documented"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "datastore",
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business",
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.1.7",
+    "bsiHeadline": "OPS.1.1.7 Systemmanagement 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@SystemManagementSolution",
+      "@BSI_ID",
+      "@Severity",
+      "@Category",
+      "@NTP-Synchronized",
+      "@SystemType",
+      "@Role:Administrator"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "iot-device",
+        "desktop",
+        "browser",
+        "reverse-proxy"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "https",
+        "http"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-cloud-provider",
+        "network-virtual-lan",
+        "network-on-prem"
+      ],
+      "usage": [
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.2.2",
+    "bsiHeadline": "OPS.1.2.2 Archivierung 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@ArchiveMigration",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@classification",
+      "@logging:sufficient",
+      "@Crypto:Weak-Encryption",
+      "@Crypto:Weak-Signing",
+      "@SystemType",
+      "@retention-policy-defined"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "database",
+        "file-server",
+        "block-storage"
+      ],
+      "type": [
+        "datastore"
+      ],
+      "protocols": [
+        "jdbc",
+        "odbc",
+        "smb",
+        "nfs"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "OPS.1.2.4",
+    "bsiHeadline": "OPS.1.2.4 Telearbeit 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@telework-client",
+      "@Context",
+      "@Location",
+      "@Telework:Hardened"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.2.5",
+    "bsiHeadline": "OPS.1.2.5 Fernwartung 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType",
+      "@outdated-protocol",
+      "@Contract",
+      "@Service:RemoteMaintenance"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser",
+        "iot-device"
+      ],
+      "type": [
+        "external-entity",
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "ssh",
+        "https",
+        "http",
+        "ftp",
+        "telnet",
+        "smtp",
+        "pop3",
+        "imap",
+        "ldap",
+        "smb",
+        "nfs"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-cloud-provider",
+        "network-virtual-lan",
+        "network-on-prem"
+      ],
+      "usage": [
+        "devops",
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.1.2.6",
+    "bsiHeadline": "OPS.1.2.6 NTPZeitsynchronisation 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@TimeSource",
+      "@Time-Sensitive",
+      "@ntp-server",
+      "@ntp-sources",
+      "@SecureTimeSync"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "OPS.2.2",
+    "bsiHeadline": "OPS.2.2 Cloud-Nutzung 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@CloudStrategy",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@cloud:legal-vetted",
+      "@SystemType"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [
+        "network-cloud-provider",
+        "network-cloud-security-group"
+      ],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "APP.3.1",
+    "bsiHeadline": "APP.3.1 Webanwendungen und Webservices 1. Beschreibung",
+    "tags": [
+      "@SystemType",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Mitigation:automated-threat-protection"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "OPS.2.3",
+    "bsiHeadline": "OPS.2.3 Nutzung von Outsourcing 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Outsourcer",
+      "@Offboarding-Plan-Exists",
+      "@BCP",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@outsourcing-strategy",
+      "@should-not-be-outsourced",
+      "@SystemType",
+      "@Outsourcing:Managed",
+      "@Provider",
+      "@Contract",
+      "@BSI_Role",
+      "@Role",
+      "@OutsourcingProvider"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "external-entity",
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "OPS.3.2",
+    "bsiHeadline": "OPS.3.2 Anbieten von Outsourcing 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@SystemType:OT",
+      "@SystemType",
+      "@OutsourcingProvider",
+      "@Outsourcing:has-subcontractors",
+      "@Access:ExternalPartners",
+      "@Custom",
+      "@Role:ExternalServiceProvider",
+      "@Offboarding:ContractuallySecured",
+      "@DataType:PII"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "external-entity",
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "ldap",
+        "ldaps"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "ORP.3",
+    "bsiHeadline": "ORP.3 Sensibilisierung und Schulung zur Informationssicherheit",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@physical-asset"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser",
+        "iot-device"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "smtp",
+        "smb"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem",
+        "network-virtual-lan"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "ORP.5",
+    "bsiHeadline": "ORP.5 Compliance Management (Anforderungsmanagement) 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.1.1",
+    "bsiHeadline": "SYS.1.1 Allgemeiner Server 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Hardening"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "file-server",
+        "ldap-server",
+        "mail-server",
+        "database",
+        "block-storage",
+        "data-lake",
+        "search-index"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "ldap",
+        "smb"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.1.2.2",
+    "bsiHeadline": "SYS.1.2.2 Windows Server 2012 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@gpo-managed",
+      "@custom role:domain-administrator",
+      "@os"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "database",
+        "file-server",
+        "ldap-server"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https",
+        "smb",
+        "ldap",
+        "ftp",
+        "ldaps"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-cloud-provider",
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.1.2.3",
+    "bsiHeadline": "SYS.1.2.3 Windows Server 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@os:windows-server",
+      "@cloud-integration:managed",
+      "@cloud-integration:disabled",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@os",
+      "@telemetry:configured",
+      "@VSM-Enabled"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.3.2",
+    "bsiHeadline": "APP.3.2 Webserver 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.1.3",
+    "bsiHeadline": "SYS.1.3 Server unter Linux und Unix 1. Beschreibung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@os:unix",
+      "@Control:unvetted-software-sources"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "database",
+        "file-server",
+        "ldap-server",
+        "message-queue",
+        "data-lake",
+        "search-engine"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem",
+        "network-cloud-provider",
+        "network-virtual-lan"
+      ],
+      "usage": [
+        "business",
+        "devops"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.1.5",
+    "bsiHeadline": "",
+    "tags": [
+      "@Hypervisor"
+    ],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "SYS.1.6",
+    "bsiHeadline": "",
+    "tags": [
+      "@ContainerHost",
+      "@Visibility:internal",
+      "@secrets-management:injected",
+      "@secrets-management:external"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "file",
+        "csv"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.1.7",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "SYS.1.8",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "SYS.1.9",
+    "bsiHeadline": "",
+    "tags": [
+      "@stereotype:terminal-server",
+      "@Technology",
+      "@Service:TerminalServer",
+      "@Needs:GPU",
+      "@Needs:Special-Peripherals"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [
+        "file",
+        "csv"
+      ],
+      "boundaries": [
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "SYS.2.1",
+    "bsiHeadline": "",
+    "tags": [],
+    "allowedScopes": {
+      "technology": [],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "SYS.2.2.3",
+    "bsiHeadline": "",
+    "tags": [
+      "@OS:Windows",
+      "@mitigation:cloud-services-restricted",
+      "@LegacyApplication",
+      "@OperatingSystem: Windows",
+      "vsm-enabled"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "client-system"
+      ],
+      "type": [],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "SYS.2.3",
+    "bsiHeadline": "",
+    "tags": [
+      "@os:unix-like",
+      "@os"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop"
+      ],
+      "type": [
+        "process"
+      ],
+      "protocols": [],
+      "dataFormats": [],
+      "boundaries": [],
+      "usage": []
+    }
+  },
+  {
+    "bsiCode": "SYS.2.4",
+    "bsiHeadline": "SYS.2.4 Clients unter macOS 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@EndpointManaged",
+      "@NAC",
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@NAC:RADIUS-Server",
+      "@NAC:Access-Switch",
+      "@Severity:",
+      "@Category:",
+      "@BSI_ID:",
+      "@NAC-Component",
+      "@NAC-Enforcement-Point",
+      "@NAC-Client",
+      "@RetentionPolicy:Defined"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "desktop",
+        "browser",
+        "iot-device",
+        "database",
+        "monitoring",
+        "file-server",
+        "local-file-system",
+        "data-lake",
+        "big-data-platform",
+        "stream-processing",
+        "message-queue",
+        "search-index",
+        "report-engine"
+      ],
+      "type": [
+        "process",
+        "datastore"
+      ],
+      "protocols": [
+        "http",
+        "https"
+      ],
+      "dataFormats": [],
+      "boundaries": [
+        "network-on-prem",
+        "network-virtual-lan",
+        "network-cloud-provider"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  },
+  {
+    "bsiCode": "APP.3.3",
+    "bsiHeadline": "APP.3.3 Fileserver 1. Beschreibung 1.1. Einleitung",
+    "tags": [
+      "@Severity",
+      "@Category",
+      "@BSI_ID",
+      "@Protected",
+      "@mitigation"
+    ],
+    "allowedScopes": {
+      "technology": [
+        "file-server"
+      ],
+      "type": [
+        "datastore",
+        "process"
+      ],
+      "protocols": [
+        "smb",
+        "nfs"
+      ],
+      "dataFormats": [
+        "file"
+      ],
+      "boundaries": [
+        "network-on-prem"
+      ],
+      "usage": [
+        "business"
+      ]
+    }
+  }
+]
