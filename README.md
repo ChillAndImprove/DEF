@@ -1,7 +1,3 @@
-# Triangle 
+# DEF
 
-Check this out!
-
-DEMO https://chillandimprove.github.io/Triangle/
-
-
+[https://chillandimprove.github.io/DEF/](https://chillandimprove.github.io/DEF/)

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSI IT-Grundschutz Risk Catalog</title>
+    <script>
+        // Apply dark mode immediately if enabled in parent/opener
+        if (window.opener && window.opener.document.body.classList.contains('dark-mode')) {
+            document.documentElement.className = 'dark-mode';
+            document.documentElement.style.backgroundColor = '#1a1a1a';
+        } else {
+            // Default to dark mode unless explicitly set to false
+            const darkModePref = localStorage.getItem('darkMode');
+            if (darkModePref !== 'false') {
+                document.documentElement.className = 'dark-mode';
+                document.documentElement.style.backgroundColor = '#1a1a1a';
+            }
+        }
+    </script>
+    <style>
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+            color:#333;
+            margin:0;
+            padding:24px;
+            background:#f5f5f5;
+        }
+        .header{
+            border-bottom:2px solid #eee;
+            padding-bottom:12px;
+            margin-bottom:18px;
+        }
+        .header h1{
+            margin:0;
+            font-size:1.6em;
+            color:#0056b3;
+        }
+        .header p{
+            margin:8px 0 0;
+            color:#666;
+            font-size:14px;
+        }
+        .toolbar{
+            display:flex;
+            gap:16px;
+            align-items:center;
+            margin:12px 0 18px;
+        }
+        .search-box{
+            flex:1;
+            padding:8px 12px;
+            border:1px solid #ddd;
+            border-radius:4px;
+            font-size:14px;
+        }
+        .bsi-group{
+            margin:18px 0;
+        }
+        .bsi-group h2{
+            font-size:1.1em;
+            color:#444;
+            margin:0 0 8px;
+        }
+        details.bsi-entry{
+            border:1px solid #e5e5e5;
+            border-radius:6px;
+            margin-bottom:8px;
+            background:#fff;
+        }
+        details.bsi-entry>summary{
+            cursor:pointer;
+            padding:10px 12px;
+            user-select:none;
+            outline:none;
+        }
+        details.bsi-entry>summary:hover{
+            background:#f5f5f5;
+        }
+        .count{
+            font-size:12px;
+            color:#666;
+            margin-left:8px;
+        }
+        ul.risks{
+            list-style:none;
+            padding:6px 12px 12px 12px;
+            margin:0;
+            display:flex;
+            flex-direction:column;
+            gap:6px;
+        }
+        li.risk{
+            padding:8px 10px;
+            border:1px solid #eee;
+            border-radius:6px;
+            display:flex;
+            gap:8px;
+            align-items:center;
+            background:#fff;
+        }
+        li.risk:hover{
+            background:#f9f9f9;
+        }
+        .stride-badge{
+            font-weight:600;
+            font-size:10px;
+            padding:2px 8px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            background:#e3f2fd;
+            color:#1976d2;
+        }
+        .cwe-badge{
+            font-weight:500;
+            font-size:10px;
+            padding:2px 8px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            background:#f3e5f5;
+            color:#7b1fa2;
+        }
+        .title{
+            flex:1;
+            color:#333;
+        }
+        .details-btn{
+            font-size:12px;
+            border:none;
+            background:#0056b3;
+            color:#fff;
+            border-radius:4px;
+            padding:6px 12px;
+            cursor:pointer;
+            white-space:nowrap;
+        }
+        .details-btn:hover{
+            background:#004494;
+        }
+        .loading{
+            text-align:center;
+            padding:40px;
+            color:#666;
+            font-size:16px;
+        }
+        /* Detail modal styles */
+        .detail-overlay{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100vh;
+            background:rgba(0,0,0,0.8);
+            z-index:20000;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+            box-sizing:border-box;
+        }
+        .detail-panel{
+            background:#fafafa;
+            width:95%;
+            max-width:1200px;
+            height:90%;
+            border-radius:8px;
+            box-shadow:0 8px 32px rgba(0,0,0,0.3);
+            display:flex;
+            flex-direction:column;
+            overflow:hidden;
+        }
+        .detail-header{
+            padding:20px 24px;
+            background:#fff;
+            border-bottom:2px solid #eee;
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+        }
+        .detail-content{
+            flex:1;
+            overflow-y:auto;
+            padding:24px;
+        }
+        .content-grid{
+            display:grid;
+            grid-template-columns:320px 1fr;
+            gap:30px;
+            max-width:1400px;
+            margin:0 auto;
+        }
+        .sidebar{
+            display:flex;
+            flex-direction:column;
+            gap:20px;
+        }
+        .info-box{
+            background:#fff;
+            border:1px solid #e0e0e0;
+            border-radius:6px;
+            padding:15px;
+        }
+        .stride-item{
+            padding:10px 15px;
+            border:1px solid #ccc;
+            border-radius:5px;
+            background:#f0f0f0;
+            color:#888;
+        }
+        .stride-item.active{
+            border:1px solid #004494;
+            background:#0056b3;
+            color:white;
+            font-weight:bold;
+            box-shadow:0 4px 10px rgba(0,86,179,0.3);
+        }
+        .section-box{
+            background:#fff;
+            border:1px solid #e0e0e0;
+            border-radius:6px;
+            padding:15px;
+            margin-bottom:20px;
+        }
+        .section-box h4{
+            margin:0 0 8px;
+            font-size:1em;
+            color:#000;
+            font-weight:600;
+        }
+        .section-box p{
+            margin:0;
+            line-height:1.6;
+            color:#444;
+        }
+        .close-btn{
+            background:#f44336;
+            color:white;
+            border:none;
+            padding:8px 16px;
+            border-radius:4px;
+            cursor:pointer;
+            font-weight:bold;
+            font-size:18px;
+        }
+        .close-btn:hover{
+            background:#d32f2f;
+        }
+
+        /* ========== DARK MODE ========== */
+        html.dark-mode{background:#1a1a1a;}
+        html.dark-mode body{background:#2a2a2a;color:#e0e0e0;}
+        html.dark-mode .header{border-bottom-color:#444;}
+        html.dark-mode .header h1{color:#4d90fe;}
+        html.dark-mode .header p{color:#b0b0b0;}
+        html.dark-mode .search-box{background:#3a3a3a;color:#e0e0e0;border-color:#555;}
+        html.dark-mode .bsi-group h2{color:#d0d0d0;}
+        html.dark-mode details.bsi-entry{background:#333;border-color:#444;}
+        html.dark-mode details.bsi-entry>summary:hover{background:#3a3a3a;}
+        html.dark-mode .count{color:#b0b0b0;}
+        html.dark-mode li.risk{background:#3a3a3a;border-color:#444;color:#e0e0e0;}
+        html.dark-mode li.risk:hover{background:#404040;}
+        html.dark-mode .title{color:#e0e0e0;}
+        html.dark-mode .details-btn{background:#4d90fe;}
+        html.dark-mode .details-btn:hover{background:#357ae8;}
+        html.dark-mode .loading{color:#b0b0b0;}
+        html.dark-mode .detail-panel{background:#2a2a2a;}
+        html.dark-mode .detail-header{background:#333;border-bottom-color:#444;}
+        html.dark-mode .detail-content{background:#2a2a2a;color:#e0e0e0;}
+        html.dark-mode .meta-box{background:#333;border-color:#555;}
+        html.dark-mode .meta-box b{color:#e0e0e0;}
+        html.dark-mode .detail-section h4{color:#e0e0e0;}
+        html.dark-mode .detail-section p{color:#d0d0d0;}
+        html.dark-mode a{color:#6bb6ff;}
+        html.dark-mode .stride-item{background:#3a3a3a;border-color:#555;color:#999;}
+        html.dark-mode .stride-item.present{background:#2a4a6a;border-color:#4a7aa9;color:#6bb6ff;}
+        html.dark-mode .stride-item.active{background:#4d90fe;border-color:#357ae8;}
+        html.dark-mode select,html.dark-mode button{background:#3a3a3a;color:#e0e0e0;border-color:#555;}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BSI IT-Grundschutz Risk Catalog</h1>
+        <p id="header-subtitle">Complete catalog of built-in BSI risks organized by IT-Grundschutz categories</p>
+    </div>
+
+    <div class="toolbar">
+        <input type="text" id="search-box" class="search-box" placeholder="Search risks by title, BSI code, or category...">
+        <label><input type="checkbox" id="collapse-all"> Collapse all</label>
+        <label>Language:
+            <select id="language-select" style="padding:6px 8px;border:1px solid #ddd;border-radius:4px;font-size:14px;">
+                <option value="en">English</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="loading" id="loading">Loading all BSI risks...</div>
+    <div id="catalog-container" style="display:none;"></div>
+
+    <script>
+        // BSI Taxonomy - complete official structure
+        const BSI_TAXONOMY = [
+            { group: 'ISMS: Sicherheitsmanagement', items: [
+                ['ISMS.1', 'Sicherheitsmanagement']
+            ]},
+            { group: 'ORP: Organisation und Personal', items: [
+                ['ORP.1', 'Organisation'],
+                ['ORP.2', 'Personal'],
+                ['ORP.3', 'Sensibilisierung und Schulung zur Informationssicherheit'],
+                ['ORP.4', 'Identitäts- und Berechtigungsmanagement'],
+                ['ORP.5', 'Compliance Management (Anforderungsmanagement)']
+            ]},
+            { group: 'CON: Konzeption und Vorgehensweise', items: [
+                ['CON.1', 'Kryptokonzept'],
+                ['CON.2', 'Datenschutz'],
+                ['CON.3', 'Datensicherungskonzept'],
+                ['CON.6', 'Löschen und Vernichten'],
+                ['CON.7', 'Informationssicherheit auf Auslandsreisen'],
+                ['CON.8', 'Software-Entwicklung'],
+                ['CON.9', 'Informationsaustausch'],
+                ['CON.10', 'Entwicklung von Webanwendungen'],
+                ['CON.11.1', 'Geheimschutz VS-NUR FÜR DEN DIENSTGEBRAUCH (VS-NfD)']
+            ]},
+            { group: 'OPS: Betrieb', items: [
+                ['OPS.1.1.1', 'Allgemeiner IT-Betrieb'],
+                ['OPS.1.1.2', 'Ordnungsgemäße IT-Administration'],
+                ['OPS.1.1.3', 'Patch- und Änderungsmanagement'],
+                ['OPS.1.1.4', 'Schutz vor Schadprogrammen'],
+                ['OPS.1.1.5', 'Protokollierung'],
+                ['OPS.1.1.6', 'Software-Tests und -Freigaben'],
+                ['OPS.1.1.7', 'Systemmanagement'],
+                ['OPS.1.2.2', 'Archivierung'],
+                ['OPS.1.2.4', 'Telearbeit'],
+                ['OPS.1.2.5', 'Fernwartung'],
+                ['OPS.1.2.6', 'NTP-Zeitsynchronisation'],
+                ['OPS.2.2', 'Cloud-Nutzung'],
+                ['OPS.2.3', 'Nutzung von Outsourcing'],
+                ['OPS.3.2', 'Anbieten von Outsourcing']
+            ]},
+            { group: 'DER: Detektion und Reaktion', items: [
+                ['DER.1', 'Detektion von sicherheitsrelevanten Ereignissen'],
+                ['DER.2.1', 'Behandlung von Sicherheitsvorfällen'],
+                ['DER.2.2', 'Vorsorge für die IT-Forensik'],
+                ['DER.2.3', 'Bereinigung weitreichender Sicherheitsvorfälle'],
+                ['DER.3.1', 'Audits und Revisionen'],
+                ['DER.3.2', 'Revision auf Basis des Leitfadens IS-Revision'],
+                ['DER.4', 'Notfallmanagement']
+            ]},
+            { group: 'APP: Anwendungen', items: [
+                ['APP.1.1', 'Office-Produkte'],
+                ['APP.1.2', 'Webbrowser'],
+                ['APP.1.4', 'Mobile Anwendung (Apps)'],
+                ['APP.2.1', 'Allgemeiner Verzeichnisdienst'],
+                ['APP.2.2', 'Active Directory Domain Services'],
+                ['APP.2.3', 'OpenLDAP'],
+                ['APP.3.1', 'Webanwendungen und Webservices'],
+                ['APP.3.2', 'Webserver'],
+                ['APP.3.3', 'Fileserver'],
+                ['APP.3.4', 'Samba'],
+                ['APP.3.6', 'DNS-Server'],
+                ['APP.4.2', 'SAP-ERP-System'],
+                ['APP.4.3', 'Relationale Datenbanksysteme'],
+                ['APP.4.4', 'Kubernetes'],
+                ['APP.4.6', 'SAP ABAP-Programmierung'],
+                ['APP.5.2', 'Microsoft Exchange und Outlook'],
+                ['APP.5.3', 'Allgemeiner E-Mail-Client und -Server'],
+                ['APP.5.4', 'Unified Communications und Collaboration'],
+                ['APP.6', 'Allgemeine Software'],
+                ['APP.7', 'Entwicklung von Individualsoftware']
+            ]},
+            { group: 'SYS: IT-Systeme', items: [
+                ['SYS.1.1', 'Allgemeiner Server'],
+                ['SYS.1.2.2', 'Windows Server 2012'],
+                ['SYS.1.2.3', 'Windows Server'],
+                ['SYS.1.3', 'Server unter Linux und Unix'],
+                ['SYS.1.5', 'Virtualisierung'],
+                ['SYS.1.6', 'Containerisierung'],
+                ['SYS.1.7', 'IBM Z'],
+                ['SYS.1.8', 'Speicherlösungen'],
+                ['SYS.1.9', 'Terminalserver'],
+                ['SYS.2.1', 'Allgemeiner Client'],
+                ['SYS.2.2.3', 'Clients unter Windows'],
+                ['SYS.2.3', 'Clients unter Linux und Unix'],
+                ['SYS.2.4', 'Clients unter macOS'],
+                ['SYS.2.5', 'Client-Virtualisierung'],
+                ['SYS.2.6', 'Virtual Desktop Infrastructure'],
+                ['SYS.3.1', 'Laptops'],
+                ['SYS.3.2.1', 'Allgemeine Smartphones und Tablets'],
+                ['SYS.3.2.2', 'Mobile Device Management (MDM)'],
+                ['SYS.3.2.3', 'iOS (for Enterprise)'],
+                ['SYS.3.2.4', 'Android'],
+                ['SYS.3.3', 'Mobiltelefon'],
+                ['SYS.4.1', 'Drucker, Kopierer und Multifunktionsgeräte'],
+                ['SYS.4.3', 'Eingebettete Systeme'],
+                ['SYS.4.4', 'Allgemeines IoT-Gerät'],
+                ['SYS.4.5', 'Wechseldatenträger']
+            ]},
+            { group: 'IND: Industrielle IT', items: [
+                ['IND.1', 'Prozessleit- und Automatisierungstechnik'],
+                ['IND.2.1', 'Allgemeine ICS-Komponente'],
+                ['IND.2.2', 'Speicherprogrammierbare Steuerung (SPS)'],
+                ['IND.2.3', 'Sensoren und Aktoren'],
+                ['IND.2.4', 'Maschine'],
+                ['IND.2.7', 'Safety Instrumented Systems'],
+                ['IND.3.2', 'Fernwartung im industriellen Umfeld']
+            ]},
+            { group: 'NET: Netze und Kommunikation', items: [
+                ['NET.1.1', 'Netzarchitektur und -design'],
+                ['NET.1.2', 'Netzmanagement'],
+                ['NET.2.1', 'WLAN-Betrieb'],
+                ['NET.2.2', 'WLAN-Nutzung'],
+                ['NET.3.1', 'Router und Switches'],
+                ['NET.3.2', 'Firewall'],
+                ['NET.3.3', 'VPN'],
+                ['NET.3.4', 'Network Access Control'],
+                ['NET.4.1', 'TK-Anlagen'],
+                ['NET.4.2', 'VoIP'],
+                ['NET.4.3', 'Faxgeräte und Faxserver']
+            ]},
+            { group: 'INF: Infrastruktur', items: [
+                ['INF.1', 'Allgemeines Gebäude'],
+                ['INF.2', 'Rechenzentrum sowie Serverraum'],
+                ['INF.5', 'Raum sowie Schrank für technische Infrastruktur'],
+                ['INF.6', 'Datenträgerarchiv'],
+                ['INF.7', 'Büroarbeitsplatz'],
+                ['INF.8', 'Häuslicher Arbeitsplatz'],
+                ['INF.9', 'Mobiler Arbeitsplatz'],
+                ['INF.10', 'Besprechungs-, Veranstaltungs- und Schulungsraum'],
+                ['INF.11', 'Allgemeines Fahrzeug'],
+                ['INF.12', 'Verkabelung'],
+                ['INF.13', 'Technisches Gebäudemanagement'],
+                ['INF.14', 'Gebäudeautomation']
+            ]}
+        ];
+
+        const container = document.getElementById('catalog-container');
+        const loadingEl = document.getElementById('loading');
+        const searchBox = document.getElementById('search-box');
+        const collapseAllEl = document.getElementById('collapse-all');
+        const languageSelect = document.getElementById('language-select');
+        const headerSubtitle = document.getElementById('header-subtitle');
+
+        let riskLocalizationData = null;
+        let allBsiRules = new Map();
+
+        // Load localization data
+        fetch('risk-strings.json')
+            .then(response => response.json())
+            .then(data => {
+                riskLocalizationData = data;
+                console.log('Localization data loaded');
+            })
+            .catch(err => console.warn('Could not load localization data:', err));
+
+        // Helper to get localized text
+        function getLocalizedText(risk, field) {
+            const originalText = risk[field] || '';
+
+            if (riskLocalizationData && languageSelect.value === 'de') {
+                const riskId = risk.id;
+                if (riskId) {
+                    const germanRisks = riskLocalizationData.de?.risks;
+                    const localizedRisk = germanRisks?.[riskId];
+                    if (localizedRisk?.[field]) {
+                        return localizedRisk[field];
+                    }
+                }
+            }
+
+            return originalText;
+        }
+
+        // Load BSI catalog
+        fetch('js/bsi-complete-catalog.json')
+            .then(response => response.json())
+            .then(catalog => {
+                loadingEl.textContent = `Organizing ${catalog.metadata.totalRisks} BSI risks by category...`;
+
+                // Process all risks from the catalog
+                for (const risk of catalog.risks) {
+                    const code = risk.bsiCode || 'Unknown';
+                    if (!allBsiRules.has(code)) {
+                        allBsiRules.set(code, []);
+                    }
+                    allBsiRules.get(code).push({
+                        id: risk.id,
+                        title: risk.title || 'Untitled Risk',
+                        description: risk.description || '',
+                        impact: risk.impact || '',
+                        action: risk.action || '',
+                        mitigation: risk.mitigation || '',
+                        check: risk.check || '',
+                        category: risk.title || 'Unknown Category',
+                        bsiCode: code,
+                        file: risk.file,
+                        cwe: risk.cwe,
+                        stride: risk.stride,
+                        function: risk.function
+                    });
+                }
+
+                loadingEl.style.display = 'none';
+                container.style.display = 'block';
+                renderCatalog();
+            })
+            .catch(error => {
+                loadingEl.textContent = 'Error loading BSI catalog: ' + error.message;
+                loadingEl.style.color = 'red';
+                console.error('Failed to load BSI catalog:', error);
+            });
+
+        // Show risk details
+        function showRiskDetails(risk) {
+            const overlay = document.createElement('div');
+            overlay.className = 'detail-overlay';
+
+            const panel = document.createElement('div');
+            panel.className = 'detail-panel';
+
+            const header = document.createElement('div');
+            header.className = 'detail-header';
+            header.innerHTML = `
+                <div>
+                    <h2 style="margin:0 0 5px;font-size:1.6em;color:#0056b3;">${getLocalizedText(risk, 'title')}</h2>
+                    <p style="margin:0;color:#666;font-size:14px;">BSI Code: ${risk.bsiCode || 'N/A'}</p>
+                </div>
+                <button class="close-btn">✕</button>
+            `;
+
+            const content = document.createElement('div');
+            content.className = 'detail-content';
+
+            const grid = document.createElement('div');
+            grid.className = 'content-grid';
+
+            // Sidebar
+            const sidebar = document.createElement('div');
+            sidebar.className = 'sidebar';
+
+            const strideBox = document.createElement('div');
+            strideBox.className = 'info-box';
+            strideBox.innerHTML = '<h4 style="margin:0 0 12px;">STRIDE Category</h4>';
+            const strideDiagram = document.createElement('div');
+            strideDiagram.style.cssText = 'display:flex;flex-direction:column;gap:8px;';
+
+            const allStrides = ['Spoofing', 'Tampering', 'Repudiation', 'Information Disclosure', 'Denial of Service', 'Elevation of Privilege'];
+            const activeStride = risk.stride ? risk.stride.replace('STRIDE.', '').replace(/([A-Z])/g, ' $1').trim() : '';
+
+            allStrides.forEach(s => {
+                const item = document.createElement('div');
+                const isActive = s.toLowerCase().replace(/\s+/g, '-') === activeStride.toLowerCase().replace(/\s+/g, '-');
+                item.className = 'stride-item' + (isActive ? ' active' : '');
+                item.textContent = s;
+                if (isActive) item.title = 'This is the STRIDE category for this risk';
+                strideDiagram.appendChild(item);
+            });
+            strideBox.appendChild(strideDiagram);
+            sidebar.appendChild(strideBox);
+
+            const metaBox = document.createElement('div');
+            metaBox.className = 'info-box';
+            metaBox.innerHTML = `
+                <div style="margin-bottom:12px;"><strong>Function:</strong> ${risk.function || 'N/A'}</div>
+                <div style="margin-bottom:12px;"><strong>CWE:</strong> ${risk.cwe ? `<a href="https://cwe.mitre.org/data/definitions/${risk.cwe}.html" target="_blank" style="color:#007bff;">${risk.cwe}</a>` : 'N/A'}</div>
+                <div><strong>File:</strong> <code style="font-size:11px;background:#f5f5f5;padding:2px 6px;border-radius:3px;">${risk.file || 'N/A'}</code></div>
+            `;
+            sidebar.appendChild(metaBox);
+
+            // Main content
+            const mainContent = document.createElement('div');
+            const sections = [
+                ['Description', getLocalizedText(risk, 'description')],
+                ['Impact', getLocalizedText(risk, 'impact')],
+                ['Recommended Action', getLocalizedText(risk, 'action')],
+                ['Mitigation', getLocalizedText(risk, 'mitigation')],
+                ['How to Check', getLocalizedText(risk, 'check')]
+            ];
+
+            sections.forEach(([title, content]) => {
+                if (content) {
+                    const box = document.createElement('div');
+                    box.className = 'section-box';
+                    box.innerHTML = `<h4>${title}</h4><p>${content}</p>`;
+                    mainContent.appendChild(box);
+                }
+            });
+
+            grid.appendChild(sidebar);
+            grid.appendChild(mainContent);
+            content.appendChild(grid);
+
+            panel.appendChild(header);
+            panel.appendChild(content);
+            overlay.appendChild(panel);
+            document.body.appendChild(overlay);
+
+            // Close handlers
+            header.querySelector('.close-btn').addEventListener('click', () => {
+                document.body.removeChild(overlay);
+            });
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) document.body.removeChild(overlay);
+            });
+        }
+
+        // Render catalog
+        function renderCatalog(searchTerm = '') {
+            container.innerHTML = '';
+            const search = searchTerm.toLowerCase();
+            let totalRisks = 0;
+
+            for (const group of BSI_TAXONOMY) {
+                const section = document.createElement('div');
+                section.className = 'bsi-group';
+
+                const h2 = document.createElement('h2');
+                h2.textContent = group.group;
+                section.appendChild(h2);
+
+                let hasVisibleItems = false;
+
+                for (const [code, title] of group.items) {
+                    let rules = [];
+                    for (const [ruleCode, ruleList] of allBsiRules.entries()) {
+                        if (ruleCode.startsWith(code + '.') || ruleCode === code) {
+                            rules = rules.concat(ruleList);
+                        }
+                    }
+
+                    const filteredRules = search ? rules.filter(r =>
+                        getLocalizedText(r, 'title').toLowerCase().includes(search) ||
+                        r.bsiCode.toLowerCase().includes(search) ||
+                        r.category.toLowerCase().includes(search)
+                    ) : rules;
+
+                    if (filteredRules.length === 0 && search) continue;
+
+                    const details = document.createElement('details');
+                    details.className = 'bsi-entry';
+                    if (!collapseAllEl.checked) details.open = true;
+
+                    const summary = document.createElement('summary');
+                    summary.textContent = `${code} ${title}`;
+
+                    const count = document.createElement('span');
+                    count.className = 'count';
+                    count.textContent = `(${filteredRules.length} risk${filteredRules.length !== 1 ? 's' : ''})`;
+                    summary.appendChild(count);
+                    details.appendChild(summary);
+
+                    if (filteredRules.length > 0) {
+                        const ul = document.createElement('ul');
+                        ul.className = 'risks';
+
+                        for (const rule of filteredRules) {
+                            const li = document.createElement('li');
+                            li.className = 'risk';
+
+                            if (rule.stride) {
+                                const badge = document.createElement('span');
+                                badge.className = 'stride-badge';
+                                badge.textContent = rule.stride.replace('STRIDE.', '').replace(/([A-Z])/g, ' $1').trim();
+                                badge.title = 'STRIDE Category';
+                                li.appendChild(badge);
+                            }
+
+                            if (rule.cwe) {
+                                const badge = document.createElement('span');
+                                badge.className = 'cwe-badge';
+                                badge.textContent = `CWE-${rule.cwe}`;
+                                badge.title = 'Common Weakness Enumeration';
+                                li.appendChild(badge);
+                            }
+
+                            const titleDiv = document.createElement('div');
+                            titleDiv.className = 'title';
+                            titleDiv.innerHTML = getLocalizedText(rule, 'title');
+                            li.appendChild(titleDiv);
+
+                            const btn = document.createElement('button');
+                            btn.className = 'details-btn';
+                            btn.textContent = 'Details';
+                            btn.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                showRiskDetails(rule);
+                            });
+                            li.appendChild(btn);
+
+                            ul.appendChild(li);
+                            totalRisks++;
+                        }
+
+                        details.appendChild(ul);
+                        hasVisibleItems = true;
+                    }
+
+                    section.appendChild(details);
+                }
+
+                if (hasVisibleItems) {
+                    container.appendChild(section);
+                }
+            }
+
+            headerSubtitle.textContent = `Complete catalog of built-in BSI risks organized by IT-Grundschutz categories (Showing ${totalRisks} risks)`;
+        }
+
+        // Event handlers
+        let searchTimeout;
+        searchBox.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => renderCatalog(e.target.value), 300);
+        });
+
+        collapseAllEl.addEventListener('change', () => renderCatalog(searchBox.value));
+
+        languageSelect.addEventListener('change', () => {
+            localStorage.setItem('preferredLanguage', languageSelect.value);
+            renderCatalog(searchBox.value);
+        });
+
+        // Set initial language
+        const savedLang = localStorage.getItem('preferredLanguage');
+        if (savedLang && ['en', 'de'].includes(savedLang)) {
+            languageSelect.value = savedLang;
+        }
+    </script>
+</body>
+</html>

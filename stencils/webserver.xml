@@ -1,64 +1,58 @@
-<shapes name="mxgraph.compute">
+<!-- Complete Web Server Shape File -->
+<shapes name="mxgraph.servers"> <!-- <<< THIS IS THE ROOT ELEMENT -->
 
-<shape name="webserver" aspect="fixed" w="190" h="190" strokewidth="1">
+<shape name="serverWebServer" aspect="fixed" w="190" h="190" strokewidth="1">
     <connections/>
     <foreground>
-        <!-- 1. Background Rectangle -->
+        <!-- 1. Background Rectangle (Light Blue Style) - SCALED -->
         <save/>
         <strokecolor color="#85C1E9"/>
         <fillcolor color="#D6EAF8"/>
+        <!-- SCALED strokewidth -->
         <strokewidth width="5"/>
+        <!-- SCALED x, y, w, h, arcsize to fill 190x190 -->
         <roundrect x="0" y="0" w="190" h="190" arcsize="13"/>
         <fillstroke/>
         <restore/>
 
-        <!-- 2. Server Base -->
+        <!-- 2. Base Server Box - SCALED -->
         <save/>
-        <strokecolor color="#34495E"/>
-        <fillcolor color="#5D6D7E"/>
+        <strokecolor color="#424949"/>
+        <fillcolor color="#ABB2B9"/>
+        <!-- SCALED strokewidth -->
         <strokewidth width="3"/>
-        <rect x="40" y="130" w="110" h="25"/>
+        <!-- SCALED x, y, w, h -->
+        <rect x="40" y="32" w="111" h="127"/>
         <fillstroke/>
         <restore/>
 
-        <!-- 3. Server Tower -->
+        <!-- 3. Document Symbol (on Server) - SCALED -->
         <save/>
-        <strokecolor color="#2C3E50"/>
-        <fillcolor color="#34495E"/>
+        <strokecolor color="#424949"/>
+        <fillcolor color="#EAECEE"/> <!-- Off-white paper color -->
+        <!-- SCALED strokewidth -->
         <strokewidth width="2"/>
-        <rect x="70" y="60" w="50" h="70"/>
+        <!-- Positioned near the top-center of the scaled server box -->
+        <!-- Main page rectangle - SCALED -->
+        <rect x="63" y="47.5" w="63" h="47.5"/>
         <fillstroke/>
-        <restore/>
-
-        <!-- 4. Web/HTTP Indicators -->
-        <save/>
-        <strokecolor color="#E74C3C"/>
-        <fillcolor color="#E74C3C"/>
-        <strokewidth width="1"/>
-        <!-- HTTP indicator dots -->
-        <ellipse x="80" y="70" w="8" h="8"/>
+        <!-- Folded corner (triangle) - SCALED -->
+        <path>
+            <move x="111" y="47.5"/> <!-- Scaled Top-right corner -->
+            <line x="127" y="63"/> <!-- Scaled Point sticking out -->
+            <line x="111" y="63"/> <!-- Scaled Bottom-right corner of fold -->
+            <close/>
+        </path>
         <fillstroke/>
-        <ellipse x="102" y="70" w="8" h="8"/>
-        <fillstroke/>
-
-        <!-- Server rack lines -->
-        <strokecolor color="#BDC3C7"/>
-        <strokewidth width="2"/>
-        <path>
-            <move x="75" y="85"/>
-            <line x="115" y="85"/>
-        </path>
-        <stroke/>
-        <path>
-            <move x="75" y="95"/>
-            <line x="115" y="95"/>
-        </path>
-        <stroke/>
-        <path>
-            <move x="75" y="105"/>
-            <line x="115" y="105"/>
-        </path>
-        <stroke/>
+         <!-- Line on page to show fold - SCALED -->
+         <path>
+             <move x="111" y="47.5"/> <line x="111" y="63"/>
+         </path>
+         <stroke/>
+        <!-- Simplified lines for text - SCALED -->
+         <path> <move x="71" y="68"/> <line x="119" y="68"/> </path> <stroke/>
+         <path> <move x="71" y="76"/> <line x="119" y="76"/> </path> <stroke/>
+         <path> <move x="71" y="84"/> <line x="103" y="84"/> </path> <stroke/>
         <restore/>
 
     </foreground>

@@ -4,23 +4,44 @@
     <title>Triangle</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script>
+		// CRITICAL: Apply dark mode IMMEDIATELY - synchronous, before ANY parsing
+		// Default to dark mode unless explicitly set to false
+		const darkModePref = localStorage.getItem('darkMode');
+		if (darkModePref !== 'false') {
+			document.documentElement.style.cssText = 'background-color: #1a1a1a !important;';
+			document.documentElement.className = 'dark-mode';
+		}
+	</script>
 
 	<!-- Project specific styles -->
 	<link rel="stylesheet" type="text/css" href="styles/grapheditor.css">
+    <!-- Replaced Tagify CDN CSS with local copy -->
+    <link rel="stylesheet" type="text/css" href="styles/vendor/tagify.css">
 	<link rel="stylesheet" type="text/css" href="styles/tagify.css">
+	<!--<script type="module" src="dist/bundle.js" defer></script>-->
+    <!--<script type="module" src="dist/app.bundle.js"></script> -->
+     <!--<script  src="js/Init.js"></script>-->
 
-    <!-- Obfuscated bundles -->
-    <script type="module" src="dist/js.bundle.js" ></script>
-    <script type="module" src="dist/app.bundle.js" ></script>
+     <!--<script type="text/javascript" src="js/Init.js"></script> -->
+    <script type="module" src="dist/js.bundle.obf.js" ></script>
+    <script type="module" src="dist/app.bundle.obf.js" ></script>
 
 	<script type="text/javascript">
-	    // Initial inline script
+	    // Initial inline script (remains unchanged)
 	    window.addEventListener('load', function() {
 		var logo = document.getElementById('logo');
+	//	logo.classList.remove('image-fade-out-transition');
 	    });
 	</script>
+     <!-- === START AUTO-GENERATED IMPORT MAP === -->
+<!-- The content between these markers will be automatically replaced -->
+<!-- Run `deno task generate-map` to update -->
+<!-- === END AUTO-GENERATED IMPORT MAP === -->
 
-	<!-- Inline styles -->
+	<!-- Inline styles (remain unchanged) -->
+	<style type="text/css">
+	</style>
 	<style type="text/css">
 	.pipeFlowAnimation {
 	  stroke-dasharray: 8;
@@ -40,7 +61,7 @@
     }
     </style>
     <script type="text/javascript">
-    // Logo fade out script
+    // Logo fade out script (remains unchanged)
     window.addEventListener('load', function() {
         var logo = document.getElementById('logo_tiger');
         setTimeout(function() {
@@ -63,16 +84,27 @@
         width: 600px;
         display: flex;
     }
+
+    /* Dark mode for logo */
+    body.dark-mode #logo_tiger {
+        filter: brightness(0.7) contrast(0.9);
+        background-color: #1a1a1a;
+    }
+
+    body.dark-mode {
+        background-color: #1a1a1a !important;
+    }
     </style>
 
 	<script type="text/javascript">
-        // This variable will be set by the child window/iframe
+                // This variable will be set by the child window/iframe
         let currentSelectedThreatStandard = "BSI"; // Initialize
         window.currentSelectedThreatStandard = "BSI";
         // Function for the child window to call
         function setThreatStandardContext(standardCode) {
             window.currentSelectedThreatStandard = standardCode;
             console.log(`Parent (index.html): Standard set to: ${currentSelectedThreatStandard}`);
+            // You can now use 'currentSelectedThreatStandard' in index.html
         }
 
         function showSelectedStandard() {
@@ -80,8 +112,9 @@
         }
 	</script>
 
+
 	<script type="text/javascript">
-		// Parses URL parameters
+		// Parses URL parameters (remains unchanged)
 		var urlParams = (function(url)
 		{
 			var result = new Object();
@@ -106,15 +139,20 @@
 		})(window.location.href);
 
 		mxLoadResources = false;
-        var RESOURCE_BASE = 'resources/grapheditor';
-        var STYLE_PATH = 'styles';
-        var IMAGE_PATH = 'images';
-        var STENCIL_PATH = 'stencils';
+        var RESOURCE_BASE = 'resources/grapheditor'; // Adjust if needed
+        var STYLE_PATH = 'styles'; // Adjust if needed
+        var IMAGE_PATH = 'images'; // Adjust if needed
+        var STENCIL_PATH = 'stencils'; // Adjust if needed
 	</script>
+
+    <!-- Core mxGraph and other remaining legacy scripts -->
 </head>
 <body class="geEditor">
+	<!-- Dark Mode Toggle -->
+	<button class="dark-mode-toggle" id="darkModeToggle">🌙 Dark Mode</button>
+
 	<!-- Language Switcher -->
-	<div id="language-switcher" style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: white; padding: 5px; border: 1px solid #ccc; border-radius: 3px;">
+	<div id="language-switcher" style="position: fixed; top: 10px; right: 10px; z-index: 1000; padding: 5px; border-radius: 3px;">
 		<label for="language-select">🌍 Language:</label>
 		<select id="language-select" onchange="switchLanguage(this.value)">
 			<option value="en">English</option>
@@ -123,11 +161,51 @@
 	</div>
 
 	<script>
+		// Apply dark mode IMMEDIATELY to prevent flash (before DOM ready)
+		// Default to dark mode unless explicitly set to false
+		const darkModePref2 = localStorage.getItem('darkMode');
+		if (darkModePref2 !== 'false') {
+			document.documentElement.classList.add('dark-mode');
+			document.body.classList.add('dark-mode');
+		}
+	</script>
+
+	<script>
+		// Dark Mode Toggle functionality
+		(function() {
+			const darkModeToggle = document.getElementById('darkModeToggle');
+			const darkModePref3 = localStorage.getItem('darkMode');
+			// Default to dark mode unless explicitly set to false
+			const savedDarkMode = darkModePref3 !== 'false';
+
+			// Update button text based on saved preference
+			if (savedDarkMode) {
+				darkModeToggle.textContent = '☀️ Light Mode';
+			}
+
+			// Toggle dark mode on button click
+			darkModeToggle.addEventListener('click', function() {
+				document.documentElement.classList.toggle('dark-mode');
+				document.body.classList.toggle('dark-mode');
+				const isDark = document.body.classList.contains('dark-mode');
+				localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+				darkModeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+				console.log('Dark mode:', isDark ? 'enabled' : 'disabled');
+			});
+		})();
+
 		// Language switcher functionality
 		function switchLanguage(lang) {
+			// Whitelist allowed languages for security
+			const allowedLanguages = ['en', 'de', 'se'];
+			if (!allowedLanguages.includes(lang)) {
+				console.warn('Invalid language:', lang);
+				return;
+			}
+
 			localStorage.setItem('preferredLanguage', lang);
-			console.log('Language switched to:', lang);
-			// Force reload to apply new language
+			window.logger?.log('Language switched to:', lang);
+			// Simple reload - language will be detected from localStorage
 			window.location.reload();
 		}
 
@@ -137,10 +215,12 @@
 			const detected = navigator.language.startsWith('de') ? 'de' : 'en';
 			const lang = saved || detected;
 
+			window.logger?.log('localStorage check - saved:', saved, 'detected:', detected, 'final:', lang);
 			document.getElementById('language-select').value = lang;
-			console.log('Current language:', lang);
+			window.logger?.log('Current language:', lang);
 		});
 	</script>
 
 	<img src="images/logo.png" id="logo_tiger" class="image-fade-out-transition">
+	<!--<script type="module" src="./bootstrap.js"></script></body>-->
 </html>

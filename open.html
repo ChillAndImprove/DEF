@@ -3,6 +3,15 @@
 <head>
     <title>Load Threat Model</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script>
+        // CRITICAL: Apply dark mode IMMEDIATELY - synchronous, before ANY parsing
+        // Default to dark mode unless explicitly set to false
+        const darkModePref = localStorage.getItem('darkMode');
+        if (darkModePref !== 'false') {
+            document.documentElement.style.cssText = 'background-color: #1a1a1a !important;';
+            document.documentElement.className = 'dark-mode';
+        }
+    </script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -39,9 +48,10 @@
         }
 
         .standard-flag {
-            width: 32px; height: auto; margin-right: 10px; cursor: pointer;
+            font-size: 32px; margin-right: 10px; cursor: pointer;
             border: 2px solid transparent; border-radius: 3px; vertical-align: middle;
             transition: border-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            display: inline-block; padding: 5px;
         }
         .standard-flag:hover { border-color: #adb5bd; transform: scale(1.1); }
         .standard-flag.selected {
@@ -51,8 +61,7 @@
         /* 🔒 Disable and gray out everything except German (BSI) */
         .standard-flag:not([data-standard="BSI"]) {
             pointer-events: none;
-            opacity: 0.5;
-            filter: grayscale(100%);
+            opacity: 0.3;
             cursor: not-allowed;
         }
         /* No hover effects for disabled flags */
@@ -64,9 +73,93 @@
         #upload-section input[type="file"] { display: block; margin-bottom: 10px; font-size: 0.9em; }
         #openSupported { font-size: 0.85em; color: #6c757d; margin-top: 5px; }
         .button-bar { margin-top: 20px; text-align: right; padding-top: 15px; border-top: 1px solid #dee2e6; }
+
+        #upload-section.drag-over {
+            background-color: #e7f3ff;
+            border: 2px dashed #007bff;
+        }
+
+        /* Dark Mode Styles - Prevent flash */
+        html.dark-mode {
+            background-color: #1a1a1a !important;
+        }
+
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        body.dark-mode h2 {
+            color: #e0e0e0;
+            border-bottom-color: #444;
+        }
+        body.dark-mode h3 {
+            color: #d0d0d0;
+        }
+        body.dark-mode section {
+            background-color: #2a2a2a;
+            border-color: #444;
+        }
+        body.dark-mode .geBtn {
+            background-color: #3a3a3a;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+        body.dark-mode .geBtn:hover {
+            background-color: #4a4a4a;
+            border-color: #666;
+        }
+        body.dark-mode .gePrimaryBtn {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        body.dark-mode .gePrimaryBtn:hover {
+            background-color: #004085;
+        }
+        body.dark-mode .geBtn.disabled {
+            background-color: #2a2a2a;
+            color: #666;
+        }
+        body.dark-mode #openSupported {
+            color: #999;
+        }
+        body.dark-mode .button-bar {
+            border-top-color: #444;
+        }
+        body.dark-mode #upload-section.drag-over {
+            background-color: #1a3a5a;
+            border-color: #4a90d9;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+            z-index: 1000;
+        }
+        .dark-mode-toggle:hover {
+            background: #0056b3;
+        }
+        body.dark-mode .dark-mode-toggle {
+            background: #ffa500;
+        }
+        body.dark-mode .dark-mode-toggle:hover {
+            background: #ff8c00;
+        }
     </style>
 </head>
 <body>
+    <button class="dark-mode-toggle" id="darkModeToggle">🌙 Dark Mode</button>
 
     <h2>Load or Start New Threat Model</h2>
 
@@ -80,18 +173,27 @@
 
     <section id="standard-section">
         <h3>Select Threat Standard / Region:</h3>
-        <img src="flags/de.png" alt="German BSI" class="standard-flag" data-standard="BSI" title="German BSI Standards">
-        <img src="flags/us.png" alt="US NIST/NSI" class="standard-flag" data-standard="NIST" title="US NIST/NSI Standards">
-        <img src="flags/fr.png" alt="French ANSSI" class="standard-flag" data-standard="ANSSI" title="French ANSSI Standards (Future)">
-        <img src="flags/eu.png" alt="EU ENISA/Generic" class="standard-flag" data-standard="GENERIC" title="Generic / EU ENISA Baseline">
+        <span class="standard-flag" data-standard="BSI" title="German BSI Standards">🇩🇪</span>
+        <span class="standard-flag" data-standard="NIST" title="US NIST/NSI Standards">🇺🇸</span>
+        <span class="standard-flag" data-standard="ANSSI" title="French ANSSI Standards (Future)">🇫🇷</span>
+        <span class="standard-flag" data-standard="GENERIC" title="Generic / EU ENISA Baseline">🇪🇺</span>
     </section>
 
     <section id="upload-section">
         <h3>Upload Your Own Model:</h3>
         <form method="POST" enctype="multipart/form-data" action="" name="openForm" id="openForm" onsubmit="return handleSubmit();" accept-charset="UTF-8">
             <input type="file" name="upfile" id="fileInput" onchange="fileChanged()" accept=".triangle">
-            <div id="openSupported">Supported format: .triangle (Triangle format)</div>
+            <div id="openSupported">Supported format: .triangle (Triangle binary format)<br>
+            <strong>💡 Tip:</strong> Drag and drop a .triangle file anywhere on this window!</div>
         </form>
+    </section>
+
+    <section id="bsi-catalog-section" style="display:none;">
+        <h3>BSI IT-Grundschutz Risk Catalog:</h3>
+        <button type="button" id="bsi-catalog-btn" class="geBtn" style="background:#2e7d32;color:white;font-weight:bold;padding:12px 20px;">
+            📖 View All 691 BSI Risks
+        </button>
+        <p style="font-size:0.85em;color:#6c757d;margin-top:8px;">Browse the complete catalog of BSI IT-Grundschutz risks organized by category</p>
     </section>
 
     <div class="button-bar">
@@ -179,6 +281,12 @@
         document.querySelectorAll('.standard-flag').forEach(flag => flag.classList.remove('selected'));
         if (flagElement) flagElement.classList.add('selected');
 
+        // Show/hide BSI Risk Catalog section based on selected standard
+        const bsiCatalogSection = document.getElementById('bsi-catalog-section');
+        if (bsiCatalogSection) {
+            bsiCatalogSection.style.display = (standardCode === 'BSI') ? 'block' : 'none';
+        }
+
         if (window.parent && typeof window.parent.setThreatStandardContext === 'function') {
             window.parent.setThreatStandardContext(standardCode);
             console.log(`Called parent.setThreatStandardContext with: ${standardCode}`);
@@ -227,13 +335,20 @@
 
         // Restore previous selection visually (but keep others disabled)
         try {
-            const savedStandard = localStorage.getItem('selectedThreatStandard');
+            const savedStandard = localStorage.getItem('selectedThreatStandard') || 'BSI';
             const flagToSelect = document.querySelector(`.standard-flag[data-standard="${savedStandard}"]`)
                                   || document.querySelector('.standard-flag[data-standard="BSI"]');
             if (flagToSelect) {
                 document.querySelectorAll('.standard-flag').forEach(flag => flag.classList.remove('selected'));
                 flagToSelect.classList.add('selected');
                 console.log(`Initial standard set/restored to: ${flagToSelect.getAttribute('data-standard')}`);
+
+                // Show BSI catalog section if BSI is selected
+                const selectedStandard = flagToSelect.getAttribute('data-standard');
+                const bsiCatalogSection = document.getElementById('bsi-catalog-section');
+                if (bsiCatalogSection && selectedStandard === 'BSI') {
+                    bsiCatalogSection.style.display = 'block';
+                }
             }
         } catch(e) {
             const defaultFlag = document.querySelector('.standard-flag[data-standard="BSI"]');
@@ -241,9 +356,81 @@
         }
 
         fileChanged();
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModePref2 = localStorage.getItem('darkMode');
+        // Default to dark mode unless explicitly set to false
+        const savedDarkMode = darkModePref2 !== 'false';
+        if (savedDarkMode) {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️ Light Mode';
+        }
+
+        darkModeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            darkModeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        });
     }
 
-    document.addEventListener('DOMContentLoaded', initializeDialog);
+    // Drag and drop support
+    function setupDragAndDrop() {
+        const body = document.body;
+        const uploadSection = document.getElementById('upload-section');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            body.addEventListener(eventName, () => {
+                uploadSection.classList.add('drag-over');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            body.addEventListener(eventName, () => {
+                uploadSection.classList.remove('drag-over');
+            }, false);
+        });
+
+        body.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.name.toLowerCase().endsWith('.triangle')) {
+                    handleFiles([file], false);
+                } else {
+                    alert('Please drop a .triangle file');
+                }
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeDialog();
+        setupDragAndDrop();
+
+        // BSI Risk Catalog button handler
+        const bsiCatalogBtn = document.getElementById('bsi-catalog-btn');
+        if (bsiCatalogBtn) {
+            bsiCatalogBtn.addEventListener('click', function() {
+                // Open BSI catalog in a new window
+                window.open('bsi-risk-catalog.html', 'BSI Risk Catalog', 'width=1400,height=900,resizable=yes,scrollbars=yes');
+            });
+        }
+    });
 </script>
 </body>
 </html>

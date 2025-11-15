@@ -63,11 +63,6 @@
 	overflow-y:auto !important;
 	font-size:12px;
 	border-left:1px solid #dadce0;
-	direction: rtl; /* Right-to-left to move scrollbar to left */
-}
-
-.geFormatContainer > * {
-	direction: ltr; /* Restore left-to-right for content */
 }
 .geSidebarFooter {
 	border-top:1px solid #dadce0;
@@ -479,9 +474,9 @@ div.mxWindow .geButton {
 }
 .geVsplit {
 	font-size:1pt;
-	cursor:ew-resize;
-	background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAHBAMAAADdS/HjAAAAGFBMVEUzMzP///9tbW1QUFCKiopBQUF8fHxfX1/IXlmXAAAAHUlEQVQImWMQEGAQFWUQFmYQF2cQEmIQE2MQEQEACy4BF67hpEwAAAAASUVORK5CYII=);
-	_background-image:url('thumb_vertical.png');
+	cursor:row-resize;
+	background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAEBAMAAACw6DhOAAAAGFBMVEUzMzP///9tbW1QUFCKiopBQUF8fHxfX1/IXlmXAAAAFElEQVQImWNgNVdzYBAUFBRggLMAEzYBy29kEPgAAAAASUVORK5CYII=);
+	_background-image:url('thumb_horz.png');
 	background-repeat:no-repeat;
 	background-position:center center;
 }
@@ -489,9 +484,9 @@ div.mxWindow .geButton {
 	border-left:1px solid #e5e5e5;
 	border-right:1px solid #e5e5e5;
 }
-.geVsplit {
-	border-left:1px solid #e5e5e5;
-	border-right:1px solid #e5e5e5;
+.geVSplit {
+	border-top:1px solid #e5e5e5;
+	border-bottom:1px solid #e5e5e5;
 }
 .geHsplit:hover, .geVsplit:hover {
 	background-color:#e0e0e0;
