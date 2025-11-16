@@ -63,6 +63,11 @@
 	overflow-y:auto !important;
 	font-size:12px;
 	border-left:1px solid #dadce0;
+	direction: rtl; /* Right-to-left to move scrollbar to left */
+}
+
+.geFormatContainer > * {
+	direction: ltr; /* Restore left-to-right for content */
 }
 .geSidebarFooter {
 	border-top:1px solid #dadce0;
@@ -474,9 +479,9 @@ div.mxWindow .geButton {
 }
 .geVsplit {
 	font-size:1pt;
-	cursor:row-resize;
-	background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAEBAMAAACw6DhOAAAAGFBMVEUzMzP///9tbW1QUFCKiopBQUF8fHxfX1/IXlmXAAAAFElEQVQImWNgNVdzYBAUFBRggLMAEzYBy29kEPgAAAAASUVORK5CYII=);
-	_background-image:url('thumb_horz.png');
+	cursor:ew-resize;
+	background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAHBAMAAADdS/HjAAAAGFBMVEUzMzP///9tbW1QUFCKiopBQUF8fHxfX1/IXlmXAAAAHUlEQVQImWMQEGAQFWUQFmYQF2cQEmIQE2MQEQEACy4BF67hpEwAAAAASUVORK5CYII=);
+	_background-image:url('thumb_vertical.png');
 	background-repeat:no-repeat;
 	background-position:center center;
 }
@@ -484,9 +489,9 @@ div.mxWindow .geButton {
 	border-left:1px solid #e5e5e5;
 	border-right:1px solid #e5e5e5;
 }
-.geVSplit {
-	border-top:1px solid #e5e5e5;
-	border-bottom:1px solid #e5e5e5;
+.geVsplit {
+	border-left:1px solid #e5e5e5;
+	border-right:1px solid #e5e5e5;
 }
 .geHsplit:hover, .geVsplit:hover {
 	background-color:#e0e0e0;
@@ -1440,6 +1445,506 @@ html td.mxWindowTitle {
 	list-style-type: disc;
 	margin: 0px;
 	padding: 10px 0 0 0;
+}
+
+/* ========================================
+   DARK MODE STYLES
+   ======================================== */
+
+/* Prevent flash by applying dark mode to html element */
+html.dark-mode {
+	background-color: #1a1a1a !important;
+}
+
+html.dark-mode {
+	background-color: #1a1a1a !important;
+	color: #e0e0e0 !important;
+}
+
+/* Editor background */
+html.dark-mode .geDiagramContainer {
+	background-color: #2a2a2a !important;
+}
+
+/* Tooltips */
+html.dark-mode div.mxTooltip {
+	background: #3a3a3a !important;
+	border-color: #555 !important;
+	color: #e0e0e0 !important;
+}
+
+/* Hints */
+html.dark-mode .geHint {
+	background-color: #2a2a2a !important;
+	border-color: #555 !important;
+	color: #e0e0e0 !important;
+	box-shadow: 1px 1px 2px 0px #000 !important;
+}
+
+/* Buttons */
+html.dark-mode .geBtn, html.dark-mode .mxWindow .geBtn {
+	background-color: #3a3a3a !important;
+	color: #e0e0e0 !important;
+	border-color: #555 !important;
+}
+
+html.dark-mode .geBtn:hover {
+	background-color: #4a4a4a !important;
+}
+
+html.dark-mode .gePrimaryBtn {
+	background-color: #4d90fe !important;
+	color: #fff !important;
+}
+
+html.dark-mode .gePrimaryBtn:hover {
+	background-color: #357ae8 !important;
+}
+
+/* Format container / sidebar */
+html.dark-mode .geFormatContainer {
+	background-color: #2a2a2a !important;
+	border-left-color: #444 !important;
+	color: #e0e0e0 !important;
+}
+
+html.dark-mode .geFormatSection {
+	border-bottom-color: #444 !important;
+	background-color: #2a2a2a !important;
+}
+
+html.dark-mode .geSidebarFooter {
+	border-top-color: #444 !important;
+	background-color: #2a2a2a !important;
+}
+
+/* Sidebar */
+html.dark-mode .geSidebarContainer {
+	background-color: #2a2a2a !important;
+	color: #e0e0e0 !important;
+}
+
+html.dark-mode .geSidebarContainer .geTitle {
+	background-color: #333 !important;
+	color: #e0e0e0 !important;
+}
+
+/* Menubar and toolbar */
+html.dark-mode .geMenubarContainer,
+html.dark-mode .geToolbarContainer {
+	background-color: #2a2a2a !important;
+	border-bottom: 1px solid #444 !important;
+}
+
+html.dark-mode .geMenubar,
+html.dark-mode .geToolbar {
+	background-color: #2a2a2a !important;
+}
+
+html.dark-mode .geMenubarContainer .geItem,
+html.dark-mode .geToolbar .geButton,
+html.dark-mode .geToolbar .geLabel {
+	color: #e0e0e0 !important;
+	background-color: #2a2a2a !important;
+}
+
+html.dark-mode .geMenubarContainer .geItem:hover,
+html.dark-mode .geToolbar .geButton:hover {
+	background-color: #3a3a3a !important;
+}
+
+html.dark-mode .geMenubarContainer a,
+html.dark-mode .geSidebarContainer a,
+html.dark-mode .geToolbar a {
+	color: #e0e0e0 !important;
+}
+
+/* Alerts and status */
+html.dark-mode .geAlert {
+	background-color: #3a2020 !important;
+	border-color: #5a3030 !important;
+	color: #ff9999 !important;
+}
+
+html.dark-mode .geStatusAlert {
+	background-color: #3a2020 !important;
+	border-color: #5a3030 !important;
+	color: #ff9999 !important;
+}
+
+html.dark-mode .geStatusMessage {
+	background: #2a3a2a !important;
+	border-color: #3a5a3a !important;
+	color: #99ff99 !important;
+}
+
+/* Inputs and selects */
+html.dark-mode input,
+html.dark-mode select,
+html.dark-mode textarea {
+	background-color: #3a3a3a !important;
+	color: #e0e0e0 !important;
+	border-color: #555 !important;
+}
+
+html.dark-mode input:focus,
+html.dark-mode select:focus,
+html.dark-mode textarea:focus {
+	background-color: #4a4a4a !important;
+	border-color: #666 !important;
+}
+
+/* Background page */
+html.dark-mode .geBackgroundPage {
+	box-shadow: 0px 0px 2px 1px #000 !important;
+}
+
+/* Panels and dialogs */
+html.dark-mode .mxWindow {
+	background-color: #2a2a2a !important;
+	border-color: #555 !important;
+}
+
+html.dark-mode .mxWindowTitle {
+	background-color: #333 !important;
+	color: #e0e0e0 !important;
+	border-bottom-color: #555 !important;
+}
+
+/* Popup menus */
+html.dark-mode .mxPopupMenu {
+	background-color: #2a2a2a !important;
+	border-color: #555 !important;
+}
+
+html.dark-mode .mxPopupMenuItem {
+	color: #e0e0e0 !important;
+}
+
+html.dark-mode .mxPopupMenuItem:hover {
+	background-color: #3a3a3a !important;
+}
+
+/* Comments */
+html.dark-mode .geCommentContainer {
+	background-color: #2a2a2a !important;
+	border-color: #444 !important;
+}
+
+html.dark-mode .geCommentTxt,
+html.dark-mode .geCommentDate,
+html.dark-mode .geCommentActions {
+	color: #e0e0e0 !important;
+}
+
+/* Language switcher */
+#language-switcher {
+	background: white;
+	border: 1px solid #ccc;
+}
+
+#language-switcher label {
+	margin-right: 5px;
+}
+
+/* Language switcher in dark mode */
+html.dark-mode #language-switcher {
+	background: #2a2a2a !important;
+	border-color: #555 !important;
+	color: #e0e0e0 !important;
+}
+
+html.dark-mode #language-switcher select {
+	background: #3a3a3a !important;
+	color: #e0e0e0 !important;
+	border-color: #555 !important;
+}
+
+/* Toggle button specific styles */
+.dark-mode-toggle {
+	position: fixed;
+	top: 10px;
+	right: 200px;
+	z-index: 10000;
+	background: #4d90fe;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.dark-mode-toggle:hover {
+	background: #357ae8;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+html.dark-mode .dark-mode-toggle {
+	background: #ffa500;
+}
+
+html.dark-mode .dark-mode-toggle:hover {
+	background: #ff8c00;
+}
+
+/* ========================================
+   ADDITIONAL DARK MODE OVERRIDES
+   ======================================== */
+
+/* Fix all remaining white backgrounds */
+html.dark-mode .geDialog,
+html.dark-mode .geToolbarContainer,
+html.dark-mode .geFooterContainer,
+html.dark-mode .geMenubar,
+html.dark-mode [style*="background:white"],
+html.dark-mode [style*="background: white"],
+html.dark-mode [style*="background:#fff"],
+html.dark-mode [style*="background: #fff"],
+html.dark-mode [style*="background-color:white"],
+html.dark-mode [style*="background-color: white"] {
+	background: #2a2a2a !important;
+	background-color: #2a2a2a !important;
+}
+
+/* Grid/Canvas background - the main drawing area */
+html.dark-mode .geDiagramContainer,
+html.dark-mode .geDiagramContainer > div,
+html.dark-mode canvas,
+html.dark-mode svg {
+	background-color: #2a2a2a !important;
+}
+
+/* Risk view dialog/window */
+html.dark-mode .mxWindow,
+html.dark-mode .mxWindowPane {
+	background-color: #2a2a2a !important;
+	color: #e0e0e0 !important;
+}
+
+html.dark-mode .mxWindowTitle {
+	background-color: #333 !important;
+	color: #e0e0e0 !important;
+}
+
+/* Tables in dialogs/views */
+html.dark-mode table,
+html.dark-mode th,
+html.dark-mode td {
+	background-color: #2a2a2a !important;
+	color: #e0e0e0 !important;
+	border-color: #444 !important;
+}
+
+html.dark-mode table th {
+	background-color: #333 !important;
+}
+
+html.dark-mode table tr:nth-child(even) {
+	background-color: #252525 !important;
+}
+
+html.dark-mode table tr:hover {
+	background-color: #3a3a3a !important;
+}
+
+/* Scrollbars in dark mode */
+html.dark-mode ::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+html.dark-mode ::-webkit-scrollbar-track {
+	background: #1a1a1a;
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb {
+	background: #444;
+	border-radius: 6px;
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+/* Dividers */
+html.dark-mode .geHsplit,
+html.dark-mode .geVsplit {
+	background-color: #333 !important;
+}
+
+/* Additional panel styles */
+html.dark-mode .gePanel {
+	background-color: #2a2a2a !important;
+	border-color: #444 !important;
+}
+
+/* Grid dots - make them visible in dark mode */
+html.dark-mode .mxGraphView {
+	background-color: #2a2a2a !important;
+}
+
+/* Ensure text in all views is visible */
+html.dark-mode div,
+html.dark-mode span,
+html.dark-mode p,
+html.dark-mode label {
+	color: #e0e0e0;
+}
+
+/* Keep certain elements with their original colors */
+html.dark-mode .mxGraphContainer,
+html.dark-mode .mxGraphContainer * {
+	/* Preserve shape colors */
+}
+
+/* Risk view and advanced dialogs */
+html.dark-mode .geDialog,
+html.dark-mode .geDialogTitle {
+	background-color: #2a2a2a !important;
+	color: #e0e0e0 !important;
+}
+
+html.dark-mode .geDialogTitle {
+	background-color: #333 !important;
+	border-bottom-color: #555 !important;
+}
+
+/* Trust Boundaries - make them gray in dark mode */
+html.dark-mode svg rect[fill]:not([fill="none"]):not([fill="transparent"]) {
+	fill: #3a3a3a !important;
+	fill-opacity: 0.3 !important;
+}
+
+/* Alternative: Target specific bright colors and make them darker */
+html.dark-mode svg rect[fill*="#ff"],
+html.dark-mode svg rect[fill*="#FF"],
+html.dark-mode svg rect[fill*="rgb(255"],
+html.dark-mode svg rect[fill*="lightblue"],
+html.dark-mode svg rect[fill*="lightgreen"],
+html.dark-mode svg rect[fill*="lightyellow"],
+html.dark-mode svg rect[fill*="lightpink"] {
+	fill: #404040 !important;
+	fill-opacity: 0.4 !important;
+}
+
+/* Make container/boundary stroke visible in dark mode */
+html.dark-mode svg rect[stroke] {
+	stroke: #666 !important;
+	stroke-opacity: 1 !important;
+}
+
+/* Swimlanes/containers background */
+html.dark-mode .mxContainer,
+html.dark-mode [style*="swimlane"] {
+	background: #3a3a3a !important;
+}
+
+/* Tagify dark mode - comprehensive */
+html.dark-mode .tagify {
+	background: #3a3a3a !important;
+	border-color: #555 !important;
+	color: #e0e0e0 !important;
+	--tag-bg: #4a4a4a;
+	--tag-hover: #5a5a5a;
+	--tag-text-color: #e0e0e0;
+	--tag-remove-bg: #666;
+	--tag-remove-btn-bg: #666;
+	--tag-remove-btn-bg--hover: #777;
+	--tag-inset-shadow-size: 0;
+	--placeholder-color: #999;
+	--input-color: #e0e0e0;
+}
+
+/* Fix white background around tagify */
+html.dark-mode .tagify:focus-within,
+html.dark-mode .tagify:hover {
+	background: #3a3a3a !important;
+	border-color: #666 !important;
+}
+
+html.dark-mode .tagify__input {
+	color: #e0e0e0 !important;
+	background: transparent !important;
+}
+
+html.dark-mode .tagify__input::before {
+	color: #999 !important;
+}
+
+html.dark-mode .tagify__tag {
+	background: #4a4a4a !important;
+	border-color: #666 !important;
+	color: #e0e0e0 !important;
+}
+
+html.dark-mode .tagify__tag:hover {
+	background: #5a5a5a !important;
+	border-color: #777 !important;
+}
+
+html.dark-mode .tagify__tag > div {
+	color: #e0e0e0 !important;
+}
+
+html.dark-mode .tagify__tag__removeBtn {
+	color: #e0e0e0 !important;
+	background: transparent !important;
+}
+
+html.dark-mode .tagify__tag__removeBtn:hover {
+	background: #666 !important;
+	color: #fff !important;
+}
+
+html.dark-mode .tagify__dropdown {
+	background: #2a2a2a !important;
+	border-color: #555 !important;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+html.dark-mode .tagify__dropdown__wrapper {
+	background: #2a2a2a !important;
+	border-color: #555 !important;
+}
+
+html.dark-mode .tagify__dropdown__item {
+	background: #2a2a2a !important;
+	color: #e0e0e0 !important;
+	border-bottom-color: #444 !important;
+}
+
+html.dark-mode .tagify__dropdown__item:hover,
+html.dark-mode .tagify__dropdown__item--active {
+	background: #3a3a3a !important;
+	color: #fff !important;
+}
+
+html.dark-mode .tagify__dropdown__item--hidden {
+	display: none;
+}
+
+html.dark-mode tags {
+	background: #3a3a3a !important;
+	color: #e0e0e0 !important;
+}
+
+/* Tagify input container */
+html.dark-mode .tagify--focus {
+	background: #3a3a3a !important;
+	border-color: #666 !important;
+	outline: none !important;
+	box-shadow: 0 0 0 2px rgba(77, 144, 254, 0.3) !important;
+}
+
+/* Fix any white backgrounds in tagify components */
+html.dark-mode .tagify *,
+html.dark-mode .tagify__dropdown * {
+	background-color: inherit;
 }
 
 .geCommentAction {

@@ -5,14 +5,34 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script>
-		// CRITICAL: Apply dark mode IMMEDIATELY - synchronous, before ANY parsing
-		// Default to dark mode unless explicitly set to false
-		const darkModePref = localStorage.getItem('darkMode');
-		if (darkModePref !== 'false') {
-			document.documentElement.style.cssText = 'background-color: #1a1a1a !important;';
-			document.documentElement.className = 'dark-mode';
-		}
+		// CRITICAL SCRIPT: Must be the first script in the head.
+		// Sets the theme based on user preference or system setting to prevent FOUC.
+		(function() {
+			function applyTheme(theme) {
+				if (theme === 'dark') {
+					document.documentElement.classList.add('dark-mode');
+				} else {
+					document.documentElement.classList.remove('dark-mode');
+				}
+			}
+			const savedTheme = localStorage.getItem('darkMode');
+			if (savedTheme) {
+				applyTheme(savedTheme === 'true' ? 'dark' : 'light');
+			} else {
+				// Default to dark mode unless explicitly set to light
+				applyTheme('dark');
+			}
+		})();
 	</script>
+
+	<style>
+		/* CRITICAL CSS: This block prevents the white flash on page load for dark mode. */
+		/* It's applied before the browser renders the body. */
+		html.dark-mode, html.dark-mode body {
+			background-color: #1a1a1a !important;
+			color: #e0e0e0 !important;
+		}
+	</style>
 
 	<!-- Project specific styles -->
 	<link rel="stylesheet" type="text/css" href="styles/grapheditor.css">
@@ -161,36 +181,21 @@
 	</div>
 
 	<script>
-		// Apply dark mode IMMEDIATELY to prevent flash (before DOM ready)
-		// Default to dark mode unless explicitly set to false
-		const darkModePref2 = localStorage.getItem('darkMode');
-		if (darkModePref2 !== 'false') {
-			document.documentElement.classList.add('dark-mode');
-			document.body.classList.add('dark-mode');
-		}
-	</script>
-
-	<script>
 		// Dark Mode Toggle functionality
 		(function() {
 			const darkModeToggle = document.getElementById('darkModeToggle');
-			const darkModePref3 = localStorage.getItem('darkMode');
-			// Default to dark mode unless explicitly set to false
-			const savedDarkMode = darkModePref3 !== 'false';
+			const isInitiallyDark = document.documentElement.classList.contains('dark-mode');
 
-			// Update button text based on saved preference
-			if (savedDarkMode) {
-				darkModeToggle.textContent = '☀️ Light Mode';
-			}
+			// Update button text based on initial state
+			darkModeToggle.textContent = isInitiallyDark ? '☀️ Light Mode' : '🌙 Dark Mode';
 
 			// Toggle dark mode on button click
 			darkModeToggle.addEventListener('click', function() {
 				document.documentElement.classList.toggle('dark-mode');
-				document.body.classList.toggle('dark-mode');
-				const isDark = document.body.classList.contains('dark-mode');
+				const isDark = document.documentElement.classList.contains('dark-mode');
+				// Store preference as 'true' or 'false' string
 				localStorage.setItem('darkMode', isDark ? 'true' : 'false');
 				darkModeToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-				console.log('Dark mode:', isDark ? 'enabled' : 'disabled');
 			});
 		})();
 
