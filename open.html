@@ -148,6 +148,23 @@
             border-color: #4a90d9;
         }
 
+        /* Dark mode for AI section */
+        html.dark-mode #ai-generation-section {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border-color: #4a5568;
+        }
+        html.dark-mode #ai-description,
+        html.dark-mode #ai-model-select,
+        html.dark-mode #ai-api-key {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+        html.dark-mode #ai-model-select option {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+
         /* Dark Mode Toggle */
         .dark-mode-toggle {
             position: fixed;
@@ -187,6 +204,80 @@
         <button type="button" id="basic_webapp" class="geBtn exampleBtn disabled" data-path="backend/basic_webapp_threat_model.yaml" title="Coming soon - not yet implemented">Basic Web App (Coming Soon)</button>
         <button type="button" id="simple_api_threat_model" class="geBtn exampleBtn disabled" data-path="backend/simple_api_threat_model.yaml" title="Coming soon - not yet implemented">Simple API (Coming Soon)</button>
         <button type="button" id="kubernetes_api_threat_model" class="geBtn exampleBtn disabled" data-path="backend/kubernetes.yaml" title="Coming soon - not yet implemented">WebGIS with Kubernetes (Coming Soon)</button>
+    </section>
+
+    <section id="ai-generation-section" style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; border: 2px solid #5a67d8;">
+        <h3 style="color: white; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5em;">🤖</span>
+            Generate Threat Model with AI
+        </h3>
+        <p style="color: #e0e7ff; font-size: 0.9em; margin-bottom: 15px;">
+            Describe your system and let AI create a complete threat model for you
+        </p>
+
+        <div style="margin-bottom: 15px;">
+            <label for="ai-description" style="display: block; color: white; font-weight: bold; margin-bottom: 8px;">
+                System Description:
+            </label>
+            <textarea
+                id="ai-description"
+                placeholder="Example: I have a web application with a React frontend, Node.js backend, PostgreSQL database, and Redis cache. Users authenticate via OAuth2. The app processes financial transactions and stores customer data..."
+                style="width: 100%; min-height: 120px; padding: 12px; border-radius: 6px; border: 2px solid #c3dafe; font-family: inherit; font-size: 0.95em; resize: vertical;"
+            ></textarea>
+        </div>
+
+        <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px;">
+                <label for="ai-model-select" style="display: block; color: white; font-weight: bold; margin-bottom: 8px;">
+                    AI Model:
+                </label>
+                <select
+                    id="ai-model-select"
+                    style="width: 100%; padding: 10px; border-radius: 6px; border: 2px solid #c3dafe; font-size: 0.95em; background: white;"
+                >
+                    <option value="">Select Model...</option>
+                    <option value="gpt-4-turbo">GPT-4 Turbo (OpenAI)</option>
+                    <option value="gpt-4">GPT-4 (OpenAI)</option>
+                    <option value="claude-3-5-sonnet">Claude 3.5 Sonnet (Anthropic)</option>
+                    <option value="claude-3-opus">Claude 3 Opus (Anthropic)</option>
+                    <option value="ollama/llama3">Llama 3 (Local - Ollama)</option>
+                    <option value="ollama/mistral">Mistral (Local - Ollama)</option>
+                </select>
+            </div>
+
+            <button
+                type="button"
+                id="ai-generate-btn"
+                class="geBtn gePrimaryBtn"
+                style="padding: 12px 30px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border: none; color: white; font-weight: bold; font-size: 1em; border-radius: 6px; cursor: pointer; box-shadow: 0 4px 15px 0 rgba(240, 147, 251, 0.5); transition: all 0.3s;"
+                onclick="generateThreatModelWithAI()"
+            >
+                <span style="font-size: 1.2em; margin-right: 8px;">✨</span>
+                Generate with AI
+            </button>
+        </div>
+
+        <div id="ai-status" style="margin-top: 15px; padding: 10px; border-radius: 6px; display: none;"></div>
+
+        <div style="margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 6px;">
+            <details>
+                <summary style="color: white; cursor: pointer; font-weight: bold;">⚙️ Configuration</summary>
+                <div style="margin-top: 10px;">
+                    <label for="ai-api-key" style="display: block; color: white; margin-bottom: 5px;">
+                        API Key (stored locally):
+                    </label>
+                    <input
+                        type="password"
+                        id="ai-api-key"
+                        placeholder="sk-..."
+                        style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #c3dafe;"
+                    >
+                    <p style="color: #e0e7ff; font-size: 0.8em; margin-top: 5px;">
+                        💡 Your API key is stored only in your browser and never sent to our servers
+                    </p>
+                </div>
+            </details>
+        </div>
     </section>
 
     <section id="standard-section">
@@ -448,7 +539,114 @@
                 window.open('bsi-risk-catalog.html', 'BSI Risk Catalog', 'width=1400,height=900,resizable=yes,scrollbars=yes');
             });
         }
+
+        // Load saved API key
+        const savedApiKey = localStorage.getItem('ai-api-key');
+        if (savedApiKey) {
+            document.getElementById('ai-api-key').value = savedApiKey;
+        }
+
+        // Save API key on change
+        document.getElementById('ai-api-key').addEventListener('change', function() {
+            localStorage.setItem('ai-api-key', this.value);
+        });
     });
+
+    // AI Threat Model Generation Function
+    async function generateThreatModelWithAI() {
+        const descriptionEl = document.getElementById('ai-description');
+        const modelSelectEl = document.getElementById('ai-model-select');
+        const apiKeyEl = document.getElementById('ai-api-key');
+        const statusEl = document.getElementById('ai-status');
+        const generateBtn = document.getElementById('ai-generate-btn');
+
+        const description = descriptionEl.value.trim();
+        const model = modelSelectEl.value;
+        const apiKey = apiKeyEl.value.trim();
+
+        // Validation
+        if (!description) {
+            showStatus('error', '⚠️ Please provide a system description');
+            return;
+        }
+
+        if (!model) {
+            showStatus('error', '⚠️ Please select an AI model');
+            return;
+        }
+
+        if (!apiKey && !model.startsWith('ollama/')) {
+            showStatus('error', '⚠️ Please provide an API key (expand Configuration section)');
+            return;
+        }
+
+        // Show loading state
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<span style="font-size: 1.2em; margin-right: 8px;">⏳</span>Generating...';
+        showStatus('loading', '🤖 AI is analyzing your system and generating threats...');
+
+        try {
+            // Call the AI generation API
+            const response = await fetch('/api/ai/generate-threat-model', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    description,
+                    model,
+                    apiKey: model.startsWith('ollama/') ? null : apiKey
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.message || 'Failed to generate threat model');
+            }
+
+            const data = await response.json();
+            showStatus('success', '✅ Threat model generated! Loading into editor...');
+
+            // Convert the response to a .triangle file and load it
+            const triangleData = data.triangleFile; // Binary data from backend
+            const blob = new Blob([triangleData], { type: 'application/x-triangle-binary' });
+            const file = new File([blob], 'ai-generated-model.triangle', { type: 'application/x-triangle-binary' });
+
+            // Load the file
+            handleFiles([file], false);
+
+            // Success message
+            setTimeout(() => {
+                showStatus('success', '✨ Success! Your AI-generated threat model is now loaded.');
+            }, 1000);
+
+        } catch (error) {
+            console.error('AI generation error:', error);
+            showStatus('error', `❌ Error: ${error.message}`);
+        } finally {
+            // Reset button
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = '<span style="font-size: 1.2em; margin-right: 8px;">✨</span>Generate with AI';
+        }
+    }
+
+    function showStatus(type, message) {
+        const statusEl = document.getElementById('ai-status');
+        statusEl.style.display = 'block';
+
+        const colors = {
+            loading: { bg: 'rgba(59, 130, 246, 0.2)', text: '#3b82f6', border: '#3b82f6' },
+            success: { bg: 'rgba(34, 197, 94, 0.2)', text: '#22c55e', border: '#22c55e' },
+            error: { bg: 'rgba(239, 68, 68, 0.2)', text: '#ef4444', border: '#ef4444' }
+        };
+
+        const style = colors[type] || colors.loading;
+        statusEl.style.background = style.bg;
+        statusEl.style.color = style.text;
+        statusEl.style.border = `2px solid ${style.border}`;
+        statusEl.style.fontWeight = 'bold';
+        statusEl.textContent = message;
+    }
 </script>
 </body>
 </html>
